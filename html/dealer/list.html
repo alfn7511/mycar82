@@ -1,0 +1,117 @@
+<?php include _HTML_BASE . "/common/header.html"; ?>
+<script type="text/javascript">
+<!--
+	var str_hour = new Array();
+	var str_min = new Array();
+	var timer = new Array();
+	var hour = new Array();	
+	var min = new Array();
+	var sec = new Array();
+//-->
+</script>
+		
+	<!-- container -->
+	<div class="container">
+		<?php include _HTML_BASE . "/common/head_title.html"; ?>
+
+
+		<!-- contents -->
+		<div class="contents bidding_list_dealer_cnt">
+
+			<!-- dealer_bidding_list -->
+			<div class="dealer_bidding_list">
+				<?php if ($output['bid_info']['list'] != NULL) {?>
+					<ul class="clear">
+						<?php foreach ( $output['bid_info']['list'] as $row ) {?>
+						<li onclick="goView('<?=$row['bid_code']?>');">
+							<!-- goods -->
+							<div class="goods">
+								<div class="img"><?=$row['bid_car_img']?></div>
+								<!-- info -->
+								<div class="info">
+									<!-- top -->
+									<div class="top clear">
+										<?=$row['bid_result']?>
+									</div>
+									<!-- e : top -->
+									<!-- tail -->
+									<div class="tail">
+										<p class="subject"><?=$row['bid_car_name']?></p>
+										<p class="date"><?=$row['bid_car_age']?> / <?=$row['bid_mileage']?>km / <?=$row['bid_fuel']?> / <?=$row['bid_transmission']?></p>
+										<p class="address"><?=$row['bid_sales_area']?></p>
+										<p class="tag clear">
+											<span><?=$row['bid_car_owner_check']?></span>
+											<span><?=$row['bid_accident_check']?></span>
+										</p>
+									</div>
+									<!-- e : tail -->
+								</div>
+								<!-- e : info -->
+							</div>
+							<!-- e : goods -->
+						</li>
+						<script type="text/javascript">
+						<!--
+							//입찰시간타이머
+							hour[<?=$row['idx']?>] = parseInt("<?=$row['bid_timer_hr']?>");	
+							min[<?=$row['idx']?>] = parseInt("<?=$row['bid_timer_min']?>");
+							sec[<?=$row['idx']?>] = parseInt("<?=$row['bid_timer_sec']?>");
+						
+							str_hour[<?=$row['idx']?>] = "";
+							str_min[<?=$row['idx']?>] = "";
+							
+							timer[<?=$row['idx']?>] = setInterval(function () {timeBidTimer("<?=$row['idx']?>")}, 1000);
+						//-->
+						</script>
+						<?php } ?>
+					</ul>
+				<?php }?>	
+			</div>
+			<!-- e : dealer_bidding_list -->
+
+
+		</div>
+		<!-- e : contents -->
+
+				
+	</div>
+	<!-- e : container -->
+<script type="text/javascript">
+<!--	
+	function goView(bid_code){
+		location.href = "/apps/bid/view.php?bid_code=" + bid_code;
+	}
+	//입찰시간타이머
+	function timeBidTimer(index){
+					
+		if(hour[index]==0 && min[index]==0 && sec[index]==0){
+			clearInterval(timer[index]); 
+			return false;
+		}
+
+		if(min[index]==0){
+			hour[index]--;
+			min[index] = 60;
+		}
+
+		if(sec[index]==0){
+			min[index]--;
+			sec[index] = 59;
+		}else{
+			sec[index]--;
+		}
+		
+		str_hour[index] = hour[index];
+		if(hour[index]<10) str_hour[index]="0"+hour[index];		
+		
+		str_min[index] = min[index];
+		if(min[index]<10) str_min[index]="0"+min[index];		
+
+		if(sec[index]<10) sec[index]="0"+sec[index];
+		$("#bid-req-hour"+index).html(str_hour[index]);
+		$("#bid-req-min"+index).html(str_min[index]);
+		$("#bid-req-sec"+index).html(sec[index]);
+	}	
+//-->
+</script>
+<?php include(_HTML_BASE."/common/footer.html"); ?>

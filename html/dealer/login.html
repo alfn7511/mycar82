@@ -1,0 +1,92 @@
+<?php include _HTML_BASE . "/common/header.html"; ?>
+	<!-- container -->
+	<div class="container">
+		
+		<?php include _HTML_BASE . "/common/head_title.html"; ?>
+		
+		<!-- contents -->
+		<div class="contents login_dealer_cnt">
+			<!-- text_b01 -->
+			<dl class="text_b01">
+				<dt>내차82에서 더 좋은 고객님을 만나세요!</dt>
+				<dd>
+					내차82는 딜러님께 최고의 서비스로<br/>
+					신속 정확하게 입찰 참여 기회를드립니다.
+				</dd>
+			</dl>
+			<!-- e : text_b01 -->
+			
+			<!-- formbox -->
+			<div class="formbox">
+				<dl>
+					<dt><b>1. 회원 아이디</b></dt>
+					<dd>
+						<div class="input"><input type="text" name="deal_id" id="deal_id"  value="sample" onFocus="if(this.value=='sample')this.value='';" onBlur="if(this.value=='')this.value='sample';"></div>
+					</dd>
+			
+					<dt><b>2. 비밀번호</b></dt>
+					<dd>
+						<div class="input"><input type="password" name="deal_pwd" id="deal_pwd"></div>
+					</dd>
+				</dl>
+				
+				<!-- button -->
+				<div class="button">
+					<a href="#" id="dealer-login-btn">확인</a>
+				</div>
+				<!-- e : button -->
+			</div>
+			<!-- e : formbox -->
+		</div>
+		<!-- e : contents -->
+				
+	</div>
+	<!-- e : container -->
+	
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		//입찰요청
+		$("#dealer-login-btn").click(function(e){
+			
+			e.preventDefault();
+			
+			if($("#deal_id").val()=="sample"){
+				alert("아이디를 입력해주세요.");
+				$("#deal_id").focus();
+				return false;
+			}
+			
+			if($("#deal_pwd").val()==""){
+				alert("패스워드를 입력해주세요.");
+				$("#deal_pwd").focus();
+				return false;
+			}
+			
+			 $.ajax({
+				url:"/apps/dealer/login_proc.php",
+				dataType:'json',
+				type:'POST',
+				data:{'deal_id':$("#deal_id").val(), 'deal_pwd':$("#deal_pwd").val()},
+				success:function(data){
+					if(data[0]['result']=="Y"){
+						//alert("로그인되었습니다.");
+						location.href = "/apps/dealer/list.php";
+					}else{
+						console.log(data[0]['result']);
+						alert("로그인정보가 잘못되었습니다.");
+						return false;
+					}
+				},
+				error:function(e) {	
+					console.log(e.responseText);
+				}	
+			  });			
+				
+		});
+	});
+//-->
+</script>	
+
+	
+<?php include(_HTML_BASE . "/common/footer.html"); ?>

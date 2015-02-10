@@ -1,0 +1,669 @@
+<?php include _HTML_BASE . "/common/header.html"; ?>
+	<!-- container -->
+	<div class="container">
+		<?php include _HTML_BASE . "/common/head_title.html"; ?>
+
+	<!-- contents -->
+	<div class="contents bidding_view_cnt">
+			<!-- bid_item -->
+			<div class="bid_item">
+				<!-- gallerybox -->
+				<div class="gallerybox">
+					<script type="text/javascript" src="/js/jquery.bxslider.js" charset="utf-8"></script>
+					
+					<!-- bxslider -->
+					<div id="bid-visual">
+						<?=$bid_car_img?>
+					</div>
+					<!-- e : bxslider -->
+					<div class="page_num"><span class="page-num">1</span>/<span class="tot-num">0</span></div>
+					<?=$bid_state_img?>
+				</div>
+				<!-- e : gallerybox  -->
+			<?php if($bid_state==3){ ?>
+				<!-- state -->
+				<div class="state">
+					<span class="time">입찰종료 <b><?=$bid_succ_date?></b></span>
+					<span class="count">입찰참여 <b><?=$bid_go_cnt?></b>명</span>
+				</div>
+				<!-- e : state -->
+				<div class="price">낙찰가 <b><?=number_format($bid_succ_price)?></b>만원</div>
+			<?php }else if($bid_state==2){ ?>
+				<!-- state -->
+				<div class="state">
+					<span class="time">낙찰자 선정중입니다. <b><?=$bid_succ_date?></b></span>
+					<span class="count">입찰참여 <b><?=$bid_go_cnt?></b>명</span>
+				</div>
+				<!-- e : state -->
+				<div class="price">현재입찰가 <b><?=$bid_max_price?></b>만원</div>	
+			<?php }else{ ?>
+				<!-- state -->
+				<div class="state">
+					<span class="time">남은 입찰시간 <b><span id="bid-req-hour">00</span>:<span id="bid-req-min">00</span>:<span id="bid-req-sec">00</span></b></span>
+					<span class="count">입찰참여 <b><span id="bid_go_cnt"><?=$bid_go_cnt?></span></b>명</span>
+				</div>
+				<!-- e : state -->
+				<div class="price">현재입찰가 <b><span id="bid_max_price"><?=$bid_max_price?></span></b>만원</div>	
+			<?php } ?>	
+				
+			
+			
+			
+			<?php
+				/*######################################## 딜러회원 - 입찰하기 ###############################################*/ 
+				if(isset($_COOKIE['deal_id'])) {
+					
+					//입찰전.
+					if($flagBidTime && $proc_price==0){
+			?>
+				<div class="bid_input">
+					<!-- mbox -->
+					<div class="mbox">
+						<p class="bid_price">
+							<strong>0</strong>
+							<span>만원</span>
+						</p>
+						<div class="buttonbox">
+							<a href="#" class="amount" title="100"><span>100</span></a>
+							<a href="#" class="amount" title="50"><span>50</span></a>
+							<a href="#" class="amount" title="10"><span>10</span></a>
+							<a href="#" class="amount" title="5"><span>5</span></a>
+							<a href="#" class="reset"><span>새로<br/>고침</span></a>
+						</div>
+					</div>
+					<!-- e : mbox -->
+					<div class="button"><a href="#" id="bid_go_btn">입찰 하기</a></div>
+				</div>
+				<input type="hidden" name="bid_price" id="bid_price" value="0" />
+				<!-- e : bid_input -->
+<script>
+	
+	
+	
+	var amount = 0;
+	var bid_price = 0;
+	$(".amount").click(function(e){		
+		e.preventDefault();
+		
+		amount = parseInt($(this).attr("title"));
+		bid_price = parseInt($("#bid_price").val());
+		bid_price = bid_price + amount;
+		$("#bid_price").val(bid_price);
+		$(".bid_input .bid_price strong").text($.number(bid_price));
+		
+	});
+	
+	$(".reset").click(function(e){		
+		e.preventDefault();
+		$("#bid_price").val(0);
+		$(".bid_input .bid_price strong").text(0);
+	});
+	
+	$("#bid_go_btn").click(function(e){
+		e.preventDefault();
+		
+		bid_price = parseInt($("#bid_price").val());
+		if(bid_price==0){
+			alert("입찰가를 입력하세요.");
+			return false;
+		}
+		
+		var msg = "해당차량을 "+$.number(bid_price)+"만원에 입찰하시겠습니까?";
+		if(confirm(msg)){
+		}else{
+			return false;
+		}
+		
+		 $.ajax({
+			url:"/apps/dealer/bid_proc.php",
+			dataType:'json',
+			type:'POST',
+			data:{'bid_code':"<?=$bid_code?>", 'bid_price':bid_price},
+			success:function(data){
+				if(data[0]['result']=="Y"){
+					$("#bid_go_cnt").html(data[0]['bid_go_cnt']);
+					$("#bid_max_price").html($.number(data[0]['bid_max_price']));
+					alert("입찰에 성공하였습니다.");
+					//$(".bid_input").slideUp();
+					location.href = "/apps/dealer/my.php";
+				}else{
+					console.log(data[0]['result']);
+					alert("입찰에 실패하였습니다.");
+					return false;
+				}
+			},
+			error:function(e) {	
+				console.log(e.responseText);
+			}	
+		  });					
+		
+	});	
+	
+</script>			
+	<?php   		
+			//입찰후
+			} else{ 
+				
+				//낙찰!!
+				if($flagSucc){
+		?>
+				<!-- customer_info -->
+				<div class="customer_info">
+					<!-- mbox -->
+					<div class="mbox">
+						<p class="text">
+							<span>성명</span>
+							<strong><?=$bid_name?> /</strong>
+							<span>전화</span>
+							<strong><?=$bid_mobile?></strong>
+						</p>
+					</div>
+					<!-- e : mbox -->
+					<div class="button"><a href="tel:<?=$bid_mobile?>">고객님께 전화하기</a></div>
+				</div>
+				<!-- e : customer_info -->
+		<?php  }else{  ?>
+				
+				<!-- customer_info -->
+				<div class="customer_info">
+					<!-- mbox -->
+					<div class="mbox">
+						<p class="text">
+							<?php if($proc_price==0){?>
+								판매자가 낙찰자 선정중입니다.
+							<?php }else{ ?>
+								<strong><?=$proc_price?>만원</strong> 으로 입찰하셨습니다.
+							<?php } ?>
+						</p>
+					</div>
+					<!-- e : mbox -->
+				</div>
+				<!-- e : customer_info -->					
+<?php				
+				}   
+			}
+	}
+	/*######################################## 딜러회원 - 입찰한정보 ###############################################*/
+?>
+			</div>
+			<!-- e : bid_item -->
+	
+	
+			<!-- subject_box -->
+			<div class="subject_box">
+				<div class="item_name"><?=$bid_car_name?></div>
+				<div class="info">
+					<p><?=$bid_car_age?> / <?=$bid_mileage?>km</p>
+					<span class="tag"><?=$bid_accident_check?></span>
+					<span class="tag"><?=$bid_car_owner_check?></span>
+				</div>
+			</div>
+			<!-- e : subject_box -->
+
+			<!-- content -->
+			<div class="content">
+				
+	
+	<?php
+			/*######################################## 딜러선택 ###############################################*/ 
+			if(isset($_COOKIE['bid_code']) && ($bid_code==trim($_COOKIE['bid_code']))) { 
+	?>	
+				<h3><b>입찰리스트</b></h3>
+				<!-- didding_list -->
+				<div class="didding_list conbox">
+					<!-- level_info -->
+					<div class="level_info">
+						<?php if ($output['bid_process']['list'] != NULL) {?>
+						<ul>
+							<?php foreach ( $output['bid_process']['list'] as $row ) {?>
+							<li <?=$row['winner_class']?>>
+								<span class="level"><?=$row['ranking_img']?></span>
+								<span class="name"><b><?=$row['deal_name']?></b></span>
+								<span class="type"><?=$row['deal_level_tagImg']?></span>
+								<span class="info"><a href="/apps/dealer/view.php?deal_id=<?=$row['deal_id']?>"><img src="/img/sub/btn_dealer_info.png" alt="딜러정보"></a></span>
+								<?=$row['deal_sel']?>
+								<span class="price"><?=$row['winner_img']?><b><?=number_format($row['proc_price'])?>만원</b></span>
+							</li>
+							<?php } ?>
+						</ul>
+						<?php } ?>
+					</div>
+					<!-- e : level_info -->
+					
+				<?php if($flagBidgo){ ?>
+					<div id="bid-desc">
+						<p class="text">
+							딜러정보를 확인 하시고 낙찰자를 선택해 주세요!<br/>
+							낙찰자  선택을 완료하면  딜러에게 고객님의 연락처가 전송됩니다.
+						</p>
+						<!-- button -->
+						<div class="button">
+							<a href="#" id="succBidder-sel-btn">낙찰자 선택 완료</a>
+						</div>
+					</div>
+					<!-- e : button -->
+				<?php }else{ ?>
+					<!-- notice_exp -->
+					<div class="notice_exp">
+						<span class="tit">낙찰액은 24시간 동안 유효합니다.</span>
+						<p class="cnt">
+							딜러가 직접 차량을 볼 때 낙찰액에서 감가액이 발생할 수 있습니다.<br/>
+							예) 입찰 등록 시와 정보와 틀리거나 사진에 없는 외부 사고 등이 발견 될 때
+						</p>
+					</div>
+					<!-- e : notice_exp -->					
+				<?php } ?>
+
+				</div>
+				<!-- e : didding_list -->
+<script>
+	$("#succBidder-sel-btn").click(function(e){
+		e.preventDefault();
+		
+		if(!$("input[name=deal_sel]:checked").val()) {
+		    alert("낙찰자를 선택해주세요.");
+		    return false;
+		}
+		var index = $("input[name=deal_sel]").index($("input[name=deal_sel]:checked"));
+		var deal_sel = $("input[name=deal_sel]:checked").val();
+		
+		var deal_info = deal_sel.split("|");
+		var deal_id = deal_info[0]; 
+		var deal_name = deal_info[1];
+		var bid_price = deal_info[2];
+		
+		var msg = deal_name+" 딜러를 낙찰자로 선택하시겠습니까?";
+		if(confirm(msg)){
+		}else{
+			return false;
+		}
+
+		 $.ajax({
+			url:"/apps/bid/succ_bidder_proc.php",
+			dataType:'json',
+			type:'POST',
+			data:{'bid_code':"<?=$bid_code?>",'deal_id':deal_id,'bid_price':bid_price},
+			success:function(data){
+				if(data[0]['result']=="Y"){
+					$(".didding_list .price").eq(index).html("<img src='/img/sub/img_winner.png' alt='winner' class='winner'><b>"+$.number(bid_price)+"만원</b>");
+					$(".didding_list .checkbox").hide();
+					$("#bid-desc").html("<div class='notice_exp'><span class='tit'>낙찰액은 24시간 동안 유효합니다.</span><p class='cnt'>딜러가 직접 차량을 볼 때 낙찰액에서 감가액이 발생할 수 있습니다.<br/>예) 입찰 등록 시와 정보와 틀리거나 사진에 없는 외부 사고 등이 발견 될 때</p></div>");
+										
+					alert("낙찰자를 선택하셨습니다. \n\n 딜러에게 고객님의 연락처가 전송됩니다.");
+					return false;
+				}else{
+					alert("입찰번호나 핸드폰번호가 잘못되거나 없습니다.");
+					return false;
+				}
+			},
+			error:function(e) {	
+				console.log(e.responseText);
+			}	
+		  });
+		
+	});
+</script>				
+<?php 
+		}
+		/*######################################## 딜러선택 // ###############################################*/
+		
+		/*######################################## 후기쓰기 ###############################################*/
+		if($flagReview){
+?>
+	<!-- postscript_box -->
+	<div class="postscript_box conbox">
+		<p class="text">
+			구매 후기를 작성해 주세요.<br/>
+			다른 판매자들께 큰 도움이 됩니다.
+		</p>
+
+<?php if ($output['bid_review']['list'] != NULL) {?>		
+		<!-- postscript_list -->
+		<ul class="postscript_list">
+			<?php foreach ( $output['bid_review']['list'] as $row ) {?>
+			<li>
+				<div class="top">
+					<span class="name"><?=$row['bid_name']?> <?=$row['r_mark_img']?></span>
+					<span class="date"><?=$row['r_regdate']?></span>
+				</div>
+				<div class="con"><?=$row['r_content']?></div>
+			</li>
+			<?php } ?>	
+		</ul>
+		<!-- e : postscript_list -->
+<?php } ?>	
+
+<?php if($flagReviewWrite){ ?>	
+		<!-- postscript_write -->
+		<div class="postscript_write formbox">
+			<dl>
+				<dt><b>1. <em><?=$review['deal_name']?></em> 딜러 평점</b></dt>
+				<dd>
+					<div class="selectbox">
+						<select name="r_mark" id="r_mark">
+							<option value="5">★ ★ ★ ★ ★</option>
+							<option value="4">★ ★ ★ ★ ☆</option>
+							<option value="3">★ ★ ★ ☆ ☆</option>
+							<option value="2">★ ★ ☆ ☆ ☆</option>
+							<option value="1">★ ☆ ☆ ☆ ☆</option>
+						</select>
+					</div>
+				</dd>
+
+				<dt><b>2. <em><?=$review['deal_name']?></em> 딜러 구매후기</b></dt>
+				<dd class="last">
+					<div class="textarea">
+						<textarea name="r_content" id="r_content"></textarea>
+					</div>
+				</dd>
+			</dl>
+			
+			<!-- button -->
+			<div class="button">
+				<a href="#" id="bid-review-btn">구매 완료 / 후기등록</a>
+			</div>
+			<!-- e : button -->
+		</div>
+		<!-- e : postscript_write -->
+	</div>
+	<!-- e : postscript_box -->
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		//입찰요청
+		$("#bid-review-btn").click(function(e){
+			e.preventDefault();
+			
+			var deal_id = "<?=$review['deal_id']?>";
+			var bid_code = "<?=$bid_code?>";
+			
+			if(deal_id==""){
+				alert("낙찰자가 없습니다.");
+				return false;
+			}
+			
+			if(bid_code==""){
+				alert("입찰코드가 없습니다.");
+				return false;
+			}
+			
+			if($("#r_content").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#r_content").focus();
+				return false;
+			}
+			
+			 $.ajax({
+				url:"/apps/bid/review_proc.php",
+				dataType:'json',
+				type:'POST',
+				data:{'deal_id':deal_id, 'bid_code':bid_code, 'r_mark':$("#r_mark").val(), 'r_content':$("#r_content").val()},
+				success:function(data){
+					if(data[0]['result']=="Y"){
+						alert("리뷰가 등록되었습니다.");
+						location.href = "/apps/bid/view.php?bid_code="+bid_code;
+						return false;
+					}else{
+						alert("리뷰등록실패!!");
+						return false;
+					}
+				},
+				error:function(e) {	
+					console.log(e.responseText);
+				}	
+			  });			
+				
+		});
+	});
+//-->
+</script>
+<?php } ?>
+
+<?php 
+		} 
+		/*######################################## 후기쓰기 // ###############################################*/
+?>	
+
+
+
+
+			
+				
+				<h3><b>차량정보</b></h3>
+				<!-- car_info -->
+				<div class="car_info conbox">
+					<table width="100%">
+						<col width="50%">
+						<col width="*">
+
+						<tr>
+							<td><?=$bid_car_age?>식</td>
+							<td><?=$bid_fuel?></td>
+						</tr>
+						<tr>
+							<td><?=$bid_mileage?> km</td>
+							<td><?=$bid_transmission?></td>
+						</tr>
+						<tr>
+							<td><?=$bid_capacity?> cc</td>
+							<td><?=$bid_car_num?></td>
+						</tr>
+						<tr>
+							<td><?=$bid_sales_area?></td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</div>
+				<!-- e : car_info -->
+
+				<h3><b>옵션 및 튜닝</b></h3>
+				<!-- option_box -->
+				<div class="option_box conbox">
+					<table width="100%">
+						<col width="33%">
+						<col width="33%">
+						<col width="*">
+						
+						<tr>
+							<th>내/ 외장 옵션</th>
+							<th>편의장치</th>
+							<th>안전장치</th>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<li><input type="checkbox" name="bid_opt_inout" id="I01"><label for="I01">풀 오토 에어컨</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I02"><label for="I04">좌우 독립 에어컨</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I03"><label for="I03">가죽시트</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I04"><label for="I04">전동시트 ( 운전석 )</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I05"><label for="I05">전동시트 ( 조수석 )</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I06"><label for="I06">전동시트 ( 뒷자석 )</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I07"><label for="I07">열선시트 ( 앞좌석 )</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I08"><label for="I08">열선시트 ( 뒷좌석)</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I09"><label for="I09">통풍시트</label></li>
+									<li><input type="checkbox" name="bid_opt_inout" id="I10"><label for="I10">후석모니터</label></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C01"><label for="C01">썬루프</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C02"><label for="C02">파노라마 썬루프</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C03"><label for="C03">하이패스</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C04"><label for="C04">전동 접이식 미러</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C05"><label for="C05">ECM 룸 미러</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C06"><label for="C06">전동 트렁크</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C07"><label for="C07">스마트 키</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C08"><label for="C08">엔진 스타트 버튼</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C09"><label for="C09">어라운드뷰</label></li>
+									<li><input type="checkbox" name="bid_opt_convenience" id="C10"><label for="C10">하이빔어시스트</label></li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li><input type="checkbox" name="bid_opt_safety" id="S01"><label for="S01">에어백 ( 운전석 )</label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S02"><label for="S02">에어백 ( 동승석 )</label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S03"><label for="S03">에어백 ( 사이드 )</label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S04"><label for="S04">커튼 에어백</label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S05"><label for="S05">ABS</label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S06"><label for="S06">TCS </label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S07"><label for="S07">후방 카메라 </label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S08"><label for="S08">후방 감지센서</label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S09"><label for="S09">후축방감지시스템</label></li>
+									<li><input type="checkbox" name="bid_opt_safety" id="S10"><label for="S10">차선이탈경보시스템</label></li>
+								</ul>
+							</td>
+						</tr>
+					</table>
+
+					<table width="100%" class="item1">
+						<col width="33%">
+						<col width="33%">
+						<col width="*">
+						<tr>
+							<th>내/ 외장 옵션</th>
+							<th>&nbsp;</th>
+							<th>&nbsp;</th>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<li><input type="checkbox" name="bid_opt_device" id="D01"><label for="D01">네비게이션</label></li>
+									<li><input type="checkbox" name="bid_opt_device" id="D02"><label for="D02">블랙박스</label></li>
+									<li><input type="checkbox" name="bid_opt_device" id="D03"><label for="D03">CD 플레이어</label></li>
+									<li><input type="checkbox" name="bid_opt_device" id="D04"><label for="D04">블루투스</label></li>
+									<li><input type="checkbox" name="bid_opt_device" id="D05"><label for="D05">USB</label></li>
+								</ul>
+							</td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+				<!-- e : option_box -->
+
+				<h3><b>기타사항</b></h3>
+				<!-- etc_notice -->
+				<div class="etc_notice conbox"><?=$bid_etc?></div>
+				<!-- e : etc_notice -->
+			</div>
+			<!-- <div id="checkout">체크아웃</div> -->
+			<!-- e : content -->
+<?php if(!isset($_COOKIE['deal_id'])) { ?>
+			<?php include(_HTML_BASE."/common/foot_menu.html"); ?>
+<?php } ?>
+		</div>		
+	</div>
+	<!-- e : container -->
+
+<script type="text/javascript">
+<!--
+		$(document).ready(function() {
+							
+			//입찰차량사진비주얼
+			var tot_num = 0;
+			var page_num = 1;
+			var bid_visual = $('#bid-visual').bxSlider({
+				pager: false,
+				onSliderLoad: function(){
+					$('.gallerybox .page_num .page-num').text("1");
+					$('.gallerybox .page_num .tot-num').text(tot_num);
+				},
+				onSlideAfter: function(){
+					page_num = bid_visual.getCurrentSlide();
+					$('.gallerybox .page_num .page-num').text(page_num+1);
+					$('.gallerybox .page_num .tot-num').text(tot_num);
+				}
+			});							
+			tot_num = bid_visual.getSlideCount();
+			
+			// 내/ 외장 옵션 선택값
+			var bid_opt_inout = "<?=$bid_opt_inout?>";
+			var index = 0;
+			$("input[name=bid_opt_inout]").each(function() {
+				index = $("input[name=bid_opt_inout]").index($(this));				
+				if(bid_opt_inout.indexOf("I"+(index+1))>0) $(this).prop('checked', true);
+			});
+			
+			// 편의장치 선택값
+			var bid_opt_convenience = "<?=$bid_opt_convenience?>";
+			var index = 0;
+			$("input[name=bid_opt_convenience]").each(function() {
+				index = $("input[name=bid_opt_convenience]").index($(this));				
+				if(bid_opt_convenience.indexOf("C"+(index+1))>0) $(this).prop('checked', true);
+			});
+			
+			// 안전장치 선택값
+			var bid_opt_safety = "<?=$bid_opt_safety?>";
+			var index = 0;
+			$("input[name=bid_opt_safety]").each(function() {
+				index = $("input[name=bid_opt_safety]").index($(this));				
+				if(bid_opt_safety.indexOf("S"+(index+1))>0) $(this).prop('checked', true);
+			});
+			
+			// 내/ 외장 옵션 선택값
+			var bid_opt_device = "<?=$bid_opt_device?>";
+			var index = 0;
+			$("input[name=bid_opt_device]").each(function() {
+				index = $("input[name=bid_opt_device]").index($(this));				
+				if(bid_opt_device.indexOf("D"+(index+1))>0) $(this).prop('checked', true);
+			});
+			
+			$("input[name=bid_opt_inout]:not(:checked)").prop("disabled", true);
+			$("input[name=bid_opt_convenience]:not(:checked)").prop("disabled", true);
+			$("input[name=bid_opt_safety]:not(:checked)").prop("disabled", true);
+			$("input[name=bid_opt_device]:not(:checked)").prop("disabled", true);
+
+
+			$( window ).unload(function() {
+				//현페이지에서 나올시 입찰번호체크아웃
+				$.cookie('bid_code', null);
+				//$("#checkout").load("/apps/bid/checkout.php");
+			});
+					
+		});
+	
+		
+		//입찰시간타이머
+		var hour = parseInt("<?=$bid_timer_hr?>");	
+		var min = parseInt("<?=$bid_timer_min?>");
+		var sec = parseInt("<?=$bid_timer_sec?>");
+	
+		var str_hour = "";
+		var str_min = "";
+		
+		var timer = setInterval(function () {timeBidTimer()}, 1000);
+		
+		function timeBidTimer(){
+			if(hour==0 && min==0 && sec==0){
+				clearInterval(timer); 
+				return false;
+			}
+	
+			if(min==0){
+				hour--;
+				min = 60;
+			}
+	
+			if(sec==0){
+				min--;
+				sec = 59;
+			}else{
+				sec--;
+			}
+			
+			str_hour = hour;
+			if(hour<10) str_hour="0"+hour;		
+			
+			str_min = min;
+			if(min<10) str_min="0"+min;		
+	
+			if(sec<10) sec="0"+sec;
+	
+			$("#bid-req-hour").html(str_hour);
+			$("#bid-req-min").html(str_min);
+			$("#bid-req-sec").html(sec);
+		}			
+//-->
+</script>
+
+<?php include(_HTML_BASE . "/common/footer.html"); ?>

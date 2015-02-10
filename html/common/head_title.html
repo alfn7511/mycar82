@@ -1,0 +1,85 @@
+<!-- head -->
+<div class="head">
+	<!-- title_option -->
+	<div class="title_option">
+		<span id="history_back" class="back button"><a href="#">이전</a></span>
+		<p class="title"><?=$head_title?></p>
+		
+	<?php if(strrpos($_SERVER["REQUEST_URI"], "/apps/dealer/view.php") !== false && isset($_COOKIE['deal_id'])){?>
+		<a href="/apps/dealer/join.php"><span class="modify button">편집</span></a>
+	<?php }else if(strrpos($_SERVER["REQUEST_URI"], "/apps/bid/view.php") !== false && isset($_COOKIE['deal_id'])){?>
+		<a href="#" id="bid-zzim-btn"><span class="bookmark button">찜하기</span></a>	
+<script type="text/javascript">
+<!--
+	$("#bid-zzim-btn").click( function(e){
+		e.preventDefault();
+		var deal_id = "<?=$_COOKIE['deal_id']?>";
+		var bid_code = "<?=$bid_code?>";
+		
+		if(deal_id==""){
+			alert("로그인을 하셔야 이용가능합니다.");
+			return false;
+		}
+		
+		if(bid_code==""){
+			alert("입찰코드가 없습니다.");
+			return false;
+		}
+		
+		$.ajax({
+			url:"/apps/dealer/zzim_proc.php",
+			dataType:'json',
+			type:'POST',
+			data:{'bid_code':bid_code},
+			success:function(data){
+				if(data[0]['result']=="Y"){
+					if(confirm("해당차량을 찜하셨습니다. 찜리스트를 확인하시겠습니까?")){
+						location.href = "/apps/dealer/zzim.php";
+					}else{
+						return false;
+					}
+				}else if(data[0]['result']=="D"){
+					alert("이미 찜리스트에 추가되었습니다.");
+					return false;
+				}else if(data[0]['result']=="login"){
+					alert("로그인을 하셔야 이용가능합니다.");
+					return false;
+				}else{
+					alert("찜하기에 실패하였습니다.");
+					return false;
+				}
+			},
+			error:function(e) {	
+				console.log(e.responseText);
+			}	
+		});				
+	} );	
+//-->
+</script>		
+	<?php }else if(strrpos($_SERVER["REQUEST_URI"], "/apps/dealer/") !== false){?>
+		<?php if(isset($_COOKIE['deal_id'])){?>
+			<a href="/apps/dealer/logout.php"><span class="logout button">로그아웃</span></a>
+		<?php }else{ ?>
+			<a href="/apps/dealer/login.php"><span class="login button">로그인</span></a>	
+		<?php } ?>
+		
+	<?php }else if(strrpos($_SERVER["REQUEST_URI"], "/apps/bid/view.php") !== false || strrpos($_SERVER["REQUEST_URI"], "/apps/info/bid_") !== false){?>
+		<a href="/apps/bid/list.php"><span class="list button">목록</span></a>		
+	<?php }else{ ?>
+		<a href="#"><span class="list button">목록</span></a>
+	<?php } ?>
+		
+	</div>
+	<!-- e : title_option -->
+	<?=$output['bid_state_cnt']?>
+</div>
+<!-- e : head -->
+<script type="text/javascript">
+<!--
+	$("#history_back").click( function(e){
+		e.preventDefault();
+		history.back(1);
+		return false;
+	} );	
+//-->
+</script>

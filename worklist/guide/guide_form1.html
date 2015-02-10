@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="euc-kr">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+
+<title>폼요소 | 퍼블리싱가이드 | 알플러스코리아</title>
+<link rel="stylesheet" type="text/css" href="../css/default.css">
+<link rel="stylesheet" type="text/css" href="../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../css/guide.css">
+<link rel="stylesheet" type="text/css" href="/share/css/content.css">
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrapper">
+	<!-- ### container ### -->
+	<div id="container">
+		<div class="wrap-content guide">
+
+			<h1 class="guide">폼객체</h1>
+
+			<!-- 텍스트필드 -->
+			<h2 class="guide">텍스트필드 : .text</h2>
+			<input type="text" class="text">
+
+			<!-- 라디오버튼 -->
+			<h2 class="guide">라디오버튼</h2>
+			<span class="label-radio">
+				<label for="chkRadio1">동의합니다.</label>
+				<input type="radio" name="test_radio" class="radio" id="chkRadio1" checked="checked">
+			</span>
+			<span class="label-radio">
+				<label for="chkRadio2">동의하지 않습니다.</label>
+				<input type="radio" name="test_radio" class="radio" id="chkRadio2">
+			</span>
+
+			<!-- 체크박스 -->
+			<h2 class="guide">체크박스</h2>
+			<span class="label-check">
+				<label for="chkAgree3">동의합니다.</label>
+				<input type="checkbox" name="agree_chk" class="check" id="chkAgree3">
+			</span>
+
+			<!-- 체크박스 -->
+			<h2 class="guide">체크박스 : 박스형</h2>
+			<span class="label-checkbox">
+				<label for="chkAgree4">선택</label>
+				<input type="checkbox" name="agree_chk" class="check" id="chkAgree4">
+			</span>
+
+			<!-- 체크박스 -->
+			<h2 class="guide">체크박스 : 리스트형</h2>
+			<p class="guide">639px이상 50% (2단), 639px미만 블록 (1단)</p>
+			<ul class="list-checkbox">
+				<li><span class="label-check"><label for="claim1">고객서비스(상담,포장 등)불만</label><input type="checkbox" name="reason_claim" class="check" id="claim1"></span></li>
+				<li><span class="label-check"><label for="claim2">배송불만</label><input type="checkbox" name="reason_claim" class="check" id="claim2"></span></li>
+				<li><span class="label-check"><label for="claim3">상품가격 불만</label><input type="checkbox" name="reason_claim" class="check" id="claim3"></span></li>
+				<li><span class="label-check"><label for="claim4">개인 정보유출 우려</label><input type="checkbox" name="reason_claim" class="check" id="claim4"></span></li>
+				<li><span class="label-check"><label for="claim5">교환/환불/반품 불만</label><input type="checkbox" name="reason_claim" class="check" id="claim5"></span></li>
+				<li><span class="label-check"><label for="claim6">쇼핑몰의 신뢰도 불만</label><input type="checkbox" name="reason_claim" class="check" id="claim6"></span></li>
+				<li><span class="label-check"><label for="claim7">방문 빈도가 낮음</label><input type="checkbox" name="reason_claim" class="check" id="claim7"></span></li>
+				<li><span class="label-check"><label for="claim8">쇼핑 기능 불만</label><input type="checkbox" name="reason_claim" class="check" id="claim8"></span></li>
+			</ul>
+
+			<!-- 셀렉트박스 -->
+			<h2 class="guide">셀렉트박스</h2>
+			<select class="select">
+				<option>선택</option>
+				<option>선택</option>
+				<option>선택 선택 선택 선택 선택</option>
+				<option>선택</option>
+				<option>선택</option>
+			</select>
+
+			<!-- 파일업로드 -->
+			<h2 class="guide">파일업로드 : .input-file</h2>
+			<div class="input-file">
+				<label for="formUpFile1"><span>첨부파일등록</span></label>
+				<input type="file" class="file" id="formUpFile1">
+				<span class="file-name"></span>
+			</div>
+
+			<!-- 폼유형1 : 동의하기 -->
+			<h2 class="guide">폼유형1 : 동의하기 : .form-agree</h2>
+			<div class="form-agree">
+				<span class="label-radio">
+					<label for="sampleAgree1">동의합니다.</label>
+					<input type="radio" name="agree_sample" class="radio" id="sampleAgree1" checked="checked">
+				</span>
+				<span class="label-radio">
+					<label for="sampleAgree2">동의하지 않습니다.</label>
+					<input type="radio" name="agree_sample" class="radio" id="sampleAgree2">
+				</span>
+			</div>
+
+			<!-- 폼유형2 : 전화번호 -->
+			<h2 class="guide">폼유형2 : 전화번호 : .form-agree</h2>
+			<div class="form-tel">
+				<select class="select" title="전화번호 지역번호(통신사번호)">
+					<option>010</option>
+				</select>
+				<span>-</span>
+				<input type="text" class="text" title="전화번호 국번">
+				<span>-</span>
+				<input type="text" class="text" title="전화번호 네자리">
+			</div>
+
+			<!-- 폼유형2 : 전화번호 -->
+			<h2 class="guide">폼객체 분기 사이즈</h2>
+			<h3 class="guide">PC기준 50% : w50</h3>
+			<p class="guide">768px이상 50%, 768미만 100%</p>
+			<input type="text" class="text w50" title="전화번호 국번">
+			<select class="select w50" title="전화번호 지역번호(통신사번호)">
+				<option>010</option>
+			</select>
+
+			<h3 class="guide">PC기준 100%  : w100</h3>
+			<p class="guide">항상 100% 유지</p>
+			<input type="text" class="text w100">
+			<select class="select w100">
+				<option>010</option>
+			</select>
+
+		</div>
+	</div>
+</div>
+
+</body>

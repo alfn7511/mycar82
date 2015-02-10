@@ -1,0 +1,347 @@
+<?php include _HTML_BASE . "/common/header.html"; ?>
+	<!-- container -->
+	<div class="container">
+		
+		<?php include _HTML_BASE . "/common/head_title.html"; ?>
+
+		<!-- contents -->
+		<div class="contents register_dealer_cnt">
+<!-- text_b01 -->
+<dl class="text_b01">
+	<dt>내차82에서 더 좋은 고객님을 만나세요!</dt>
+	<dd>
+		내차82는 딜러님께 최고의 서비스로<br/>
+		신속 정확하게 입찰 참여 기회를드립니다.
+	</dd>
+</dl>
+<!-- e : text_b01 -->
+
+<!-- formbox -->
+<div class="formbox">
+<form id="deal_join_form" method="post" enctype="multipart/form-data" action="/apps/dealer/join_proc.php">
+<?=$output['body']['hidden_cmd_join']?>
+	<dl>
+		
+<?php if($mode=="add"){ ?>
+		<dt><b>1. 회원 아이디</b></dt>
+		<dd>
+			<div class="input"><input type="text" name="deal_id" id="deal_id" value="sample" maxlength="20" onFocus="if(this.value=='sample')this.value='';" onBlur="if(this.value=='')this.value='sample';"></div>
+			<div id="deal_id_commt" class="comment"></div>
+		</dd>
+<?php }else{ ?>
+		<dt><b>1. 회원 아이디</b></dt>
+		<dd><?=$deal_id?></dd>			
+<?php } ?>
+		
+		<dt><b>2. 비밀번호</b></dt>
+		<dd>
+			<div class="input"><input type="password" name="deal_pwd" id="deal_pwd" maxlength="20"></div>
+			<div id="deal_pwd_commt" class="comment"></div>
+		</dd>
+		<?php if($mode=="add"){ ?>		
+		<dt><b>3. 비밀번호 확인</b></dt>
+		<dd>
+			<div class="input"><input type="password" name="deal_pwd_check" id="deal_pwd_check" maxlength="20"></div>
+			<div id="deal_pwd_check_commt" class="comment"></div>
+		</dd>
+		<?php } ?>
+		<dt><b>4. 이름</b></dt>
+		<dd>
+			<div class="input"><input type="text" name="deal_name" id="deal_name" maxlength="20"  value="홍길동" onFocus="if(this.value=='홍길동')this.value='';" onBlur="if(this.value=='')this.value='홍길동';"></div>
+		</dd>
+
+		<dt><b>5. 주소</b></dt>
+		<dd>
+			<div class="input"><input type="text" name="deal_addr" id="deal_addr" maxlength="100"  value="서울시" onFocus="if(this.value=='서울시')this.value='';" onBlur="if(this.value=='')this.value='서울시';"></div>
+		</dd>
+
+		<dt><b>6. 상사이름</b></dt>
+		<dd>
+			<div class="input"><input type="text" name="deal_boss" id="deal_boss" maxlength="20"  value="우리자동차" onFocus="if(this.value=='우리자동차')this.value='';" onBlur="if(this.value=='')this.value='우리자동차';"></div>
+		</dd>
+
+		<dt><b>7. 본인 핸드폰</b></dt>
+		<dd>
+			<div class="input"><input type="text" name="deal_phone" id="deal_phone" maxlength="20"  value="우리자동차" onFocus="if(this.value=='우리자동차')this.value='';" onBlur="if(this.value=='')this.value='우리자동차';"></div>
+		</dd>
+
+		<dt><b>8. 전화번호</b></dt>
+		<dd>
+			<div class="input"><input type="text" name="deal_tel" id="deal_tel" maxlength="20"  value="예) 010-1234-1234" onFocus="if(this.value=='예) 010-1234-1234')this.value='';" onBlur="if(this.value=='')this.value='예) 010-1234-1234';"></div>
+		</dd>
+
+		<dt><b>9. 사무실 전화번호</b></dt>
+		<dd>
+			<div class="input"><input type="text" name="deal_office_tel" id="deal_office_tel" maxlength="20"  value="예) 010-1234-1234" onFocus="if(this.value=='예) 010-1234-1234')this.value='';" onBlur="if(this.value=='')this.value='예) 010-1234-1234';"></div>
+		</dd>
+
+		<dt><b>10. 이미지사진</b></dt>
+		<dd class="pic">
+			<div class="input">
+				<input type="file" name="deal_img" id="deal_img">
+				<input type="text" name="deal_img_filename" id="deal_img_filename" disabled="disabled"/>
+				<a href="#" class="btn_find">찾아보기</a>
+			</div>
+			
+		</dd>
+
+		<dt><b>11. 딜러소개</b></dt>
+		<dd>
+			<div class="textarea">
+				<textarea name="deal_introduce" id="deal_introduce"><?=$deal_introduce?></textarea>
+			</div>
+		</dd>
+
+		<dt><b>12. 딜러증 첨부</b></dt>
+		<dd class="pic">
+			<div class="input">
+				<input type="file" name="deal_attach" id="deal_attach">
+				<input type="text" name="deal_attach_filename" id="deal_attach_filename" disabled="disabled"/>
+				<a href="#" class="btn_find">찾아보기</a>
+			</div>
+		</dd>
+		<?php if($mode=="add"){ ?>		
+		<dt><b>13. 약관동의</b></dt>
+		<dd>
+			<div class="terms">
+				<input type="checkbox" name="terms_agree" id="terms_agree" value="Y"><label for="terms_agree">내차 82 서비스 이용약관에 동의 합니다.</label>
+				<a href="/apps/info/deal_terms.php" class="btn_view_terms" target="_blank">보기</a>
+			</div>
+		</dd>
+		<?php } ?>
+	</dl>
+	
+	<!-- button -->
+<?php if($mode=="add"){ ?>		
+	<div class="button"><button type="submit">확인</button></div>
+<?php }else{ ?>
+	<div class="button"><button type="submit">수정</button></div>
+<?php } ?>
+	<!-- e : button -->
+</form>
+</div>
+<!-- e : formbox -->
+
+		</div>
+		<!-- e : contents -->
+
+		
+	</div>
+	<!-- e : container -->
+
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		
+		$("#deal_name").val("<?=$deal_name?>");
+		$("#deal_addr").val("<?=$deal_addr?>");
+		$("#deal_boss").val("<?=$deal_boss?>");
+		$("#deal_phone").val("<?=$deal_phone?>");
+		$("#deal_tel").val("<?=$deal_tel?>");
+		$("#deal_office_tel").val("<?=$deal_office_tel?>");
+		
+		var index = 0;
+		var flagIdDup = false;
+		var flagPwd = false;
+		var reg = /^[a-z0-9]{6,16}$/;
+		
+		//딜러이미지, 첨부파일 업로드
+		$(".pic .input input[type='file']").on('change', function() {
+			index = $(".pic .input input[type='file']").index($(this));
+
+			ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+			//배열에 추출한 확장자가 존재하는지 체크
+			if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {				
+				alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+				return false;
+			}			
+			$(".pic .input input[type='text']").eq(index).val( $(this).val());
+		});
+		
+		//중복아이디 체크
+		$( "#deal_id" ).keyup(function() {
+		  //console.log( "Handler for .keyup() called."+$(this).val());
+		  if( !reg.test($(this).val()) ) {
+			  $("#deal_id_commt").html("아이디는 6~16자 사이의 영문 소문자와 숫자만 입력가능합니다.");
+			  flagIdDup = true;
+			  return false;
+		  }
+		
+		 $.ajax({
+			url:"/apps/dealer/join_id_check.php",
+			dataType:'json',
+			type:'POST',
+			data:{'deal_id':$(this).val()},
+			success:function(data){
+				if(data[0]['result']=="Y"){
+					$("#deal_id_commt").html("입력하신 회원님의 아이디는 사용가능합니다.");
+					flagIdDup = false;
+				}else{
+					$("#deal_id_commt").html("입력하신 회원님의 아이디는 사용중인 아이디입니다.");
+					flagIdDup = true;
+				}
+			},
+			error:function(e) {	
+				console.log(e.responseText);
+			}	
+		  });
+		   //$("#memId_commt").html("입력하신 회원님의 ID는 사용가능합니다.");
+
+		});
+		
+		//패스워드 체크
+		$( "#deal_pwd" ).keyup(function() {
+			if( !reg.test($(this).val()) ) {
+			  $("#deal_pwd_commt").html("패스워드는 6~16자 사이의 영문 소문자와 숫자만 입력가능합니다.");
+			  return false;
+		 	}
+		});
+		
+	<?php if($mode=="add"){ ?>		
+		//패스워드확인 체크
+		$( "#deal_pwd_check" ).keyup(function() {
+			if( !reg.test($(this).val()) ) {
+			  $("#deal_pwd_check_commt").html("패스워드는 6~16자 사이의 영문 소문자와 숫자만 입력가능합니다.");
+			  return false;
+		  	}
+		  	
+		  	if($("#deal_pwd").val() == $(this).val()){
+		  		$("#deal_pwd_check_commt").html("패스워드가 확인되었습니다.");
+			  	return false;
+		  	}else{
+		  		$("#deal_pwd_check_commt").html("패스워드확인이 다릅니다.");
+			  	return false;
+		  	}
+		});
+	<?php } ?>
+		
+		//딜러회원가입
+		$("#deal_join_form").on("submit", function(){
+			
+		<?php if($mode=="add"){ ?>			
+			var terms_agree = $("input[name='terms_agree']:checked").val();
+			 if(terms_agree != "Y"){
+				alert("서비스 이용약관에 동의를 선택하세요.");
+				$("#terms_agree").focus();
+				return false;
+			 }
+		<?php } ?>	 
+			 
+			if($("#deal_id").val()=="sample"){
+				alert("회원 아이디를 입력해주세요.");
+				$("#deal_id").focus();
+				return false;
+			}
+			
+			if( !reg.test($("#deal_id").val()) ) {
+				alert("아이디는 6~16자 사이의 영문 소문자와 숫자만 입력가능합니다.");
+				$("#deal_id").focus();
+				return false;
+			}
+			
+			if(flagIdDup){
+				alert("아이디를 다시 입력해주세요.");
+				$("#deal_id").focus();
+				return false;
+			}
+		<?php if($mode=="add"){ ?>		
+			if($("#deal_pwd").val()==""){
+				alert("패스워드를 입력해주세요.");
+				$("#deal_pwd").focus();
+				return false;
+			}
+			
+			if( !reg.test($("#deal_pwd").val()) ) {
+				alert("패스워드는 6~16자 사이의 영문 소문자와 숫자만 입력가능합니다.");
+				$("#deal_pwd").focus();
+				return false;
+			}
+			
+			if($("#deal_pwd_check").val()==""){
+				alert("패스워드확인을 입력해주세요.");
+				$("#deal_pwd_check").focus();
+				return false;
+			}
+
+			if($("#deal_pwd").val() != $("#deal_pwd_check").val()){
+				alert("패스워드가 서로 다릅니다.");
+				$("#deal_pwd_check").focus();
+				return false;
+			}
+		<?php }else{ ?>
+			if($("#deal_pwd").val()==""){
+				alert("패스워드를 입력해주세요.");
+				$("#deal_pwd").focus();
+				return false;
+			}
+			
+			if( !reg.test($("#deal_pwd").val()) ) {
+				alert("패스워드는 6~16자 사이의 영문 소문자와 숫자만 입력가능합니다.");
+				$("#deal_pwd").focus();
+				return false;
+			}				
+		<?php } ?>
+
+			if($("#deal_name").val()=="홍길동"){
+				alert("이름을 입력해주세요.");
+				$("#deal_name").focus();
+				return false;
+			}
+
+			if($("#deal_addr").val()=="서울시"){
+				alert("주소를 입력해주세요.");
+				$("#deal_addr").focus();
+				return false;
+			}
+
+			if($("#deal_boss").val()=="우리자동차"){
+				alert("상사이름을 입력해주세요.");
+				$("#deal_boss").focus();
+				return false;
+			}
+			if($("#deal_tel").val()=="예) 010-1234-1234"){
+				alert("전화번호을 입력해주세요.");
+				$("#deal_tel").focus();
+				return false;
+			}
+
+			if($("#deal_office_tel").val()=="예) 010-1234-1234"){
+				alert("사무실 전화번호을 입력해주세요.");
+				$("#deal_office_tel").focus();
+				return false;
+			}
+
+			if($("#deal_introduce").val()==""){
+				alert("딜러소개를 입력해주세요.");
+				$("#deal_introduce").focus();
+				return false;
+			}
+		<?php if($mode=="add"){ ?>			
+			if($("#deal_img_filename").val()==""){
+				alert("본인사진을 선택하세요.");
+				return false;
+			}
+
+			if($("#deal_attach_filename").val()==""){
+				alert("딜러증 이미지파일를 선택하세요.");
+				return false;
+			}
+		<?php } ?>	
+
+		<?php if($mode=="add"){ ?>		
+			var msg = "회원가입을 하시겠습니까?";
+		<?php }else{ ?>
+			var msg = "회원정보를 수정하시겠습니까?";
+		<?php } ?>
+			
+			if(confirm(msg)){
+			}else{
+				return false;
+			}
+
+		});
+	});
+//-->
+</script>	
+	
+<?php include(_HTML_BASE . "/common/footer.html"); ?>

@@ -1,0 +1,95 @@
+<?php include _HTML_BASE . "/common/header.html"; ?>
+	
+	<!-- container -->
+	<div class="container">
+		
+		<?php include _HTML_BASE . "/common/head_title.html"; ?>
+
+		<!-- contents -->
+		<div class="contents notify_cnt">
+			<!-- text_b01 -->
+			<dl class="text_b01">
+				<dt>이용에 불편을 드려서 죄송합니다.</dt>
+				<dd>
+					고객님 불편사항이 있으시면 즉시 신고해 주십시요.<br/>
+					더 좋은 서비스가 되도록 최선을 다하겠습니다. 
+				</dd>
+			</dl>
+			<!-- e : text_b01 -->
+			
+			<!-- formbox -->
+			<div class="formbox">
+				<dl>
+					<dt><b>1. 제목</b></dt>
+					<dd>
+						<div class="input"><input type="text" name="co_title" id="co_title"></div>
+						<!-- ★ ★ ★ ★ ★ -->
+					</dd>
+			
+					<dt><b>2. 내용 / 불편을 느꼈던 점</b></dt>
+					<dd>
+						<div class="textarea">
+							<textarea name="co_content" id="co_content"></textarea>
+						</div>
+					</dd>
+				</dl>
+				
+				<!-- button -->
+				<div class="button">
+					<a href="#" id="bid-complain-btn">신고하기</a>
+				</div>
+				<!-- e : button -->
+			</div>
+			<!-- e : formbox -->
+		</div>
+		<!-- e : contents -->				
+	</div>
+	<!-- e : container -->
+
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		//입찰요청
+		$("#bid-complain-btn").click(function(e){
+			
+			e.preventDefault();
+			
+			if($("#co_title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#bid_code").focus();
+				return false;
+			}
+			
+			if($("#co_content").val()==""){
+				alert("내용을 입력해주세요.");
+				$("#bid_phone").focus();
+				return false;
+			}
+			
+			 $.ajax({
+				url:"/apps/bid/complain_proc.php",
+				dataType:'json',
+				type:'POST',
+				data:{'co_title':$("#co_title").val(), 'co_content':$("#co_content").val()},
+				success:function(data){
+					if(data[0]['result']=="Y"){
+						alert("신고되었습니다. \n\n 더 좋은 서비스가 되도록 최선을 다하겠습니다.");
+						location.href = "/";
+						return false;
+					}else{
+						alert("신고되지 않았습니다.");
+						return false;
+					}
+				},
+				error:function(e) {	
+					console.log(e.responseText);
+				}	
+			  });			
+				
+		});
+	});
+//-->
+</script>
+	
+		
+<?php include(_HTML_BASE . "/common/footer.html"); ?>

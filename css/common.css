@@ -1,0 +1,220 @@
+@charset 'utf-8';
+@font-face {
+	font-family:'NanumGothic';
+	src: url('../../font/NanumGothic.eot');
+	src: url('../../font/NanumGothic.eot?#iefix') format('embedded-opentype'), url('../../font/NanumGothic.woff') format('woff'), url('../../font/NanumGothic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family:'NanumGothicBold';
+	src: url('../../font/NanumGothicBold.eot');
+	src: url('../../font/NanumGothicBold.eot?#iefix') format('embedded-opentype'), url('../../font/NanumGothicBold.woff') format('woff'), url('../../font/NanumGothicBold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+@font-face {
+	font-family:'NanumGothicExtraBold';
+	src: url('../../font/NanumGothicExtraBold.eot');
+	src: url('../../font/NanumGothicExtraBold.eot?#iefix') format('embedded-opentype'), url('../../font/NanumGothicExtraBold.woff') format('woff'), url('../../font/NanumGothicExtraBold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+body { font:100%/1em 'NanumGothic', Dotum, 돋움, Helvetica, AppleSDGothicNeo, sans-serif; color: #383d41; background-color:#222; }
+
+@media (min-width: 320px){
+	body{font-size:1em;}
+}
+@media (min-width: 352px){
+	body{font-size:1.1em;}
+}
+@media (min-width: 384px){
+	body{font-size:1.2em;}
+}
+@media (min-width: 416px){
+	body{font-size:1.3em;}
+}
+@media (min-width: 448px){
+	body{font-size:1.4em;}
+}
+@media (min-width: 480px){
+	body{font-size:1.5em;}
+}
+@media (min-width: 512px){
+	body{font-size:1.6em;}
+}
+@media (min-width: 544px){
+	body{font-size:1.7em;}
+}
+@media (min-width: 576px){
+	body{font-size:1.8em;}
+}
+@media (min-width: 608px){
+	body{font-size:1.9em;}
+}
+@media (min-width: 640px){
+	body{font-size:2em;}
+}
+
+
+/** 공통 **/
+.clear:after { content:""; display: block; clear: both; float: none; }
+
+#wrap{
+	position: relative;
+	max-width:640px;
+	min-width:320px;
+	margin:0 auto;
+	background-color:#fff;
+	padding-bottom:4.188em
+}
+
+
+/***********************************
+1. header
+***********************************/
+#header { position:relative; background-color:#2c9dde; height:3.219em; border-bottom:1px solid #262938;}
+#header h1 { position:absolute; left:0.688em; top:0.625em; }
+#header h1 img{ width:5.313em; height:auto; }
+#header .copy{ display:block; padding:1.344em 0 0 0; text-align:center; }
+#header .copy img{ width:auto; height:0.781em;}
+#header .btn{ position:absolute; right:0.375em; top:0.906em; }
+#header .btn a{ float:left; display:block; width:1.469em; height:auto; margin-left:0.094em; }
+
+
+/***********************************
+2. container
+***********************************/
+.container{}
+/* container > head */
+.container .head{}
+/* container > head > title_option */
+.head .title_option { position:relative; background:url(../img/sub/sub_top_bg.png) repeat-x left top; background-size:auto 100%; border-bottom:1px solid #cdccd3; }
+.head .title_option p.title{ font-size:0.938em; height:2.667em; line-height:2.667em; text-align:center; font-family:'NanumGothicBold'; color:#000000; }
+.head .title_option .button { position:absolute; display:block; top:0; font-size:0.938em; height:2.667em; background-repeat:no-repeat; background-position:center 50%; background-size:auto 100%; text-indent:-5000px; overflow:hidden; cursor:pointer; }
+.head .title_option .back { left:0; border-right:1px solid #cdccd3; width:2.933em; background-image:url(../img/sub/btn_history_back.png); }
+.head .title_option .list { right:0; border-left:1px solid #cdccd3; width:4.733em; background-image:url(../img/sub/btn_menu_list.png); }
+.head .title_option .bookmark { right:0; border-left:1px solid #cdccd3; width:4.733em; background-image:url(../img/sub/btn_bookmark.png); }
+.head .title_option .modify { right:0; border-left:1px solid #cdccd3; width:4.733em; background-image:url(../img/sub/btn_modify.png); }
+.head .title_option .login { right:0; border-left:1px solid #cdccd3; width:4.733em; background-image:url(../img/sub/btn_login.jpg); }
+.head .title_option .logout { right:0; border-left:1px solid #cdccd3; width:4.733em; background-image:url(../img/sub/btn_logout.jpg); }
+/* container > head > state */
+.head .state{ background-color:#393e4f; text-align:center; }
+.head .state span{
+	display:inline-block;
+	font-family:'NanumGothicBold';
+	color:#fff;
+	font-size:0.500em;
+	vertical-align:top;
+	padding:0 0.5em;
+	border-left:1px solid #4a4a4a;
+	text-align:center;
+	line-height:2.625em;
+}
+.head .state span.tit{ border-left:0; }
+
+
+
+/***********************************
+2-1. bottom menu
+***********************************/
+
+#bottom_bid_menu{
+	position: fixed; left:0; bottom:0; width: 100%;  z-index:999; 
+}
+#bottom_bid_menu ul{
+	position: relative; max-width:640px; min-width:320px; margin:0 auto; 
+	background:url(../img/common/btm_bg.png) repeat-x left top;
+}
+#bottom_bid_menu ul li{float:left; width:25%;}
+#bottom_bid_menu ul li a{
+	display:block; width:100%; height: 100%; line-height: 100%;
+	background-repeat:no-repeat;
+	background-position:left top;
+	background-size:100% auto;
+}
+#bottom_bid_menu ul li a img{
+	width:100%; height:auto;
+}
+#bottom_bid_menu ul li.bid-list{}
+#bottom_bid_menu ul li.bid-my-list{}
+#bottom_bid_menu ul li.bid-succ{}
+#bottom_bid_menu ul li.bid-my-info{}
+#bottom_bid_menu ul li.bid-list a{ background-image:url(../img/common/btm01.png); }
+#bottom_bid_menu ul li.bid-my-list a{ background-image:url(../img/common/btm02.png);}
+#bottom_bid_menu ul li.bid-succ a{ background-image:url(../img/common/btm03.png); }
+#bottom_bid_menu ul li.bid-my-info a{ background-image:url(../img/common/btm04.png); }
+#bottom_bid_menu ul li.bid-list a:hover{ background-image:url(../img/common/btm01_on.png); }
+#bottom_bid_menu ul li.bid-my-list a:hover{ background-image:url(../img/common/btm02_on.png); } 
+#bottom_bid_menu ul li.bid-succ a:hover{ background-image:url(../img/common/btm03_on.png); }
+#bottom_bid_menu ul li.bid-my-info a:hover{ background-image:url(../img/common/btm04_on.png); }
+
+#bottom_bid_menu ul li.dealer-list a{ background-image:url(../img/common/bdm01.png); }
+#bottom_bid_menu ul li.dealer-my-list a{ background-image:url(../img/common/bdm02.png);}
+#bottom_bid_menu ul li.dealer-succ a{ background-image:url(../img/common/bdm03.png); }
+#bottom_bid_menu ul li.dealer-my-info a{ background-image:url(../img/common/bdm04.png); }
+#bottom_bid_menu ul li.dealer-list a:hover{ background-image:url(../img/common/bdm01_on.png); }
+#bottom_bid_menu ul li.dealer-my-list a:hover{ background-image:url(../img/common/bdm02_on.png); } 
+#bottom_bid_menu ul li.dealer-succ a:hover{ background-image:url(../img/common/bdm03_on.png); }
+#bottom_bid_menu ul li.dealer-my-info a:hover{ background-image:url(../img/common/bdm04_on.png); }
+
+
+
+
+
+/***********************************
+2-2. all_menu 
+***********************************/
+.all_menu{ 
+	position:fixed;
+	width:15.000em;
+	z-index:999999; 
+	right:-15.000em; top:1.063em;
+	height:100%;
+	background-color:#fff;
+}
+.all_menu .toparea{
+	position:relative;
+	background-color:#2c9dde;
+	border-bottom:1px solid #000;
+}
+.all_menu #menu_close{ position:absolute; right:0; top:0; cursor:pointer; }
+.all_menu .menu_list{ padding:1em 1em;}
+.all_menu .menu_list ul{width:100%;}
+.all_menu .menu_list ul:after{ display:block; clear:both; height:0; content:"";}
+.all_menu .menu_list ul li{ float:left; width:25%; margin-bottom:0.5em;}
+.all_menu .menu_list ul li dl{
+}
+.all_menu .menu_list ul li dl dt{
+	width:2.625em;
+	margin:0 auto;
+}
+.all_menu .menu_list ul li dl dd{
+	font-size:0.500em;
+	text-align:center;
+	letter-spacing:-0.1em;
+	font-family:'NanumGothicBold';
+	line-height:2em;
+}
+.all_menu_bg{
+	position:fixed;
+	display:none;
+	z-index:9999;
+	width:100%; height:100%;
+	background:url(../img/common/all_menu_bg.png) repeat left top;
+}
+
+/***********************************
+3. footer
+***********************************/
+#footer{}
+
+
+
+
+
+
+
+
+

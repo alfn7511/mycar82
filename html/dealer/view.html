@@ -1,0 +1,45 @@
+<?php include _HTML_BASE . "/common/header.html"; ?>
+	<!-- container -->
+	<div class="container">
+		
+		<?php include _HTML_BASE . "/common/head_title.html"; ?>
+
+	
+		<!-- contents -->
+		<div class="contents my_info_cnt">
+			<div class="section">
+				<h3>내정보</h3>
+				<dl class="basic">
+					<dt><span>아이디</span></dt>
+					<dd><span><?=$deal_id?></span></dd>
+					<dt><span>이름</span></dt>
+					<dd><span><?=$deal_name?></span><?=$deal_level_tagImg?></dd>
+					<dt><span>주소</span></dt>
+					<dd><span><?=$deal_addr?></span></dd>
+					<dt><span>사무실전화</span></dt>
+					<dd><span><?=$deal_office_tel ?></span></dd>
+				</dl>
+			</div>
+			
+			<div class="section">
+				<h3>사진등록</h3>
+				<div class="pic">
+					<span><img src="/data/dealer_join/<?=$deal_img_file?>" alt="" /></span>
+					<span></span>
+					<span></span>
+				</div>
+				<p class="text">소비자에게 믿음을 줄 수 있는 사진을 올려주세요.</p>
+			</div>
+			
+			<div class="section">
+				<h3>내정보</h3>
+				<div class="textarea"><?=$deal_introduce?></div>
+			</div>
+
+		</div>
+		<!-- e : contents -->
+
+		
+	</div>
+	<!-- e : container -->	
+<?php include(_HTML_BASE . "/common/footer.html"); ?>

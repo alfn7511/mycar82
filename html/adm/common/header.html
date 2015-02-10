@@ -1,0 +1,38 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+<title>관리자 레이아웃 | MYCAR82 Admin</title>
+<link rel="stylesheet" type="text/css" href="/css/adm/default.css">
+<link rel="stylesheet" type="text/css" href="/css/adm/common.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery/ui.all.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery.cluetip.css"/>
+<SCRIPT type="text/javascript" src="/js/jquery-1.11.0.min.js"></SCRIPT>
+<!-- <SCRIPT type="text/javascript" src="/js/jquery.ui.1.8.23.min.js"></SCRIPT> -->
+<SCRIPT type="text/javascript" src="/js/adm/common.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="/js/jquery.ui.datepicker.js"></SCRIPT>
+<?=$output['head']['js']?>
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<a href="#section" class="nav-skip">주요컨텐츠 바로가기</a>
+<!-- header -->
+<div id="header">
+	<!-- # 타이틀 및 GNB  -->
+	<h1><a href="#none" title="메인페이지로">MYCAR82</a></h1>
+	<div class="info-log">
+		<p class="mes"><?=$_COOKIE['admin_name']?> 관리자님 안녕하세요.</p>
+		<ul class="info">
+			<li>최종접속시간 : 0000년 00월 00일 00:00</li>
+			<li>자동로그아웃 남은 시간 : 0시간 00분 00초</li>
+		</ul>
+	</div>
+	<ul class="nav-gnb">
+		<li class="gnb1"><a href="/apps/adm/logout.php">로그아웃</a></li>
+	</ul>
+</div>
+<!-- //header -->

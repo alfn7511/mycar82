@@ -1,0 +1,27 @@
+	<!-- footer -->
+	<div id="footer">
+		<a href="tel:02-1234-1234"><img src="/img/common/guide_bnr.png" alt=""></a>
+	</div>
+	<!-- e : footer -->
+	
+	<div id="bottom_bid_menu">
+		<ul class="clear">
+		<?php if(isset($_COOKIE['deal_id'])) { ?>
+			<li class="dealer-list"><a href="/apps/dealer/list.php"><img src="/img/common/btm_bin.png" alt="입찰목록"></a></li>
+			<li class="dealer-my-list"><a href="/apps/dealer/my.php"><img src="/img/common/btm_bin.png" alt="내입찰리스트"></a></li>
+			<li class="dealer-succ"><a href="/apps/dealer/my.php"><img src="/img/common/btm_bin.png" alt="입찰성공"></a></li>
+			<li class="dealer-my-info"><a href="/apps/dealer/view.php"><img src="/img/common/btm_bin.png" alt="내정보"></a></li>
+		<?php }else { ?>
+			<li class="bid-list"><a href="/apps/bid/list.php"><img src="/img/common/btm_bin.png" alt="입찰목록"></a></li>
+			<li class="bid-my-list"><a href="/apps/bid/register.php"><img src="/img/common/btm_bin.png" alt="내차입찰하기"></a></li>
+			<li class="bid-succ"><a href="/apps/bid/check.php"><img src="/img/common/btm_bin.png" alt="입찰확인"></a></li>
+			<li class="bid-my-info"><a href="/apps/bid/check.php"><img src="/img/common/btm_bin.png" alt="후기등록"></a></li>	
+		<?php } ?>
+		</ul>
+	</div>
+</div>
+<!-- e : wrap -->
+
+
+</body>
+</html>

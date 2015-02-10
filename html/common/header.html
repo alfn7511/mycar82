@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title><?= $output['page_title']; ?></title>
+	<!--[if lt IE 9]>
+	<script src="/js/html5shiv.js"></script>
+	<![endif]-->
+
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="/js/IE9.js"></script>
+	<![endif]-->
+
+	<!--[if IE 6]>
+	<script type="text/javascript" src="/js/DD_belatedPNG_0.0.8a-min.js"></script>
+	<script type="text/javascript">DD_belatedPNG.fix('.png');</script>
+	<![endif]-->
+	<script src="/js/jquery-1.11.0.min.js"></script>
+	<script src="/js/jquery.number.js"></script>
+	<?=$output['head']['js']?>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/css/sub.css" />
+</head>
+<body>			
+	
+<?=$output['body']['hidden_cmd']?>
+
+<style type="text/css">
+
+</style>
+<!-- nav -->
+<div class="all_menu" id="menu_area">
+	<div class="toparea">
+		<img src="/img/common/title_all_menu.png" alt="전체메뉴">
+		<span id="menu_close"><img src="/img/common/btn_menu_close.png" alt="닫기"></span>
+	</div>
+	<!-- menu_list -->
+	<div class="menu_list">
+		<ul>
+	<?php if(strrpos($_SERVER["REQUEST_URI"], "/apps/dealer/") !== false){?>
+		
+		<?php if(isset($_COOKIE['deal_id'])) { ?>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu15.png" alt=""></a></dt>
+					<dd>딜러로그아웃</dd>
+				</dl>
+			</li>	
+		<?php }else { ?>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu09.png" alt=""></a></dt>
+					<dd>딜러가입</dd>
+				</dl>
+			</li>	
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu10.png" alt=""></a></dt>
+					<dd>딜러 로그인</dd>
+				</dl>
+			</li>			
+		<?php } ?>					
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu01.png" alt=""></a></dt>
+					<dd>입찰목록</dd>
+				</dl>
+			</li>	
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu12.png" alt=""></a></dt>
+					<dd>입찰성공</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu13.png" alt=""></a></dt>
+					<dd>마이페이지</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu14.png" alt=""></a></dt>
+					<dd>찜목록</dd>
+				</dl>
+			</li>
+
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu16.png" alt=""></a></dt>
+					<dd>입찰성공</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu05.png" alt=""></a></dt>
+					<dd>이용약관</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu06.png" alt=""></a></dt>
+					<dd>개인정보취급</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu07.png" alt=""></a></dt>
+					<dd>이용안내</dd>
+				</dl>
+			</li>													
+	<?php }else { ?>
+		<?php if(strrpos($_SERVER["REQUEST_URI"], "/apps/bid/view.php") !== false || isset($_COOKIE['deal_id'])){?>
+		<?php if(isset($_COOKIE['deal_id'])) { ?>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu15.png" alt=""></a></dt>
+					<dd>딜러로그아웃</dd>
+				</dl>
+			</li>	
+		<?php }else { ?>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu09.png" alt=""></a></dt>
+					<dd>딜러가입</dd>
+				</dl>
+			</li>	
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu10.png" alt=""></a></dt>
+					<dd>딜러 로그인</dd>
+				</dl>
+			</li>			
+		<?php } ?>					
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu01.png" alt=""></a></dt>
+					<dd>입찰목록</dd>
+				</dl>
+			</li>	
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu12.png" alt=""></a></dt>
+					<dd>입찰성공</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu13.png" alt=""></a></dt>
+					<dd>마이페이지</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu14.png" alt=""></a></dt>
+					<dd>찜목록</dd>
+				</dl>
+			</li>
+
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu16.png" alt=""></a></dt>
+					<dd>입찰성공</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu05.png" alt=""></a></dt>
+					<dd>이용약관</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu06.png" alt=""></a></dt>
+					<dd>개인정보취급</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu07.png" alt=""></a></dt>
+					<dd>이용안내</dd>
+				</dl>
+			</li>					
+		<?php }else { ?>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu01.png" alt=""></a></dt>
+					<dd>입찰목록</dd>
+				</dl>
+			</li>	
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu02.png" alt=""></a></dt>
+					<dd>내차입찰</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu02.png" alt=""></a></dt>
+					<dd>입찰확인</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu03.png" alt=""></a></dt>
+					<dd>견적함</dd>
+				</dl>
+			</li>	
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu04.png" alt=""></a></dt>
+					<dd>이용후기</dd>
+				</dl>
+			</li>				
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu05.png" alt=""></a></dt>
+					<dd>이용약관</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu06.png" alt=""></a></dt>
+					<dd>개인정보취급</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu07.png" alt=""></a></dt>
+					<dd>이용안내</dd>
+				</dl>
+			</li>
+			<li>
+				<dl>
+					<dt><a href="#"><img src="/img/common/icon_menu08.png" alt=""></a></dt>
+					<dd>신고하기</dd>
+				</dl>
+			</li>			
+		<?php } ?>
+			<?php } ?>
+		</ul>
+	</div>
+	<!-- e : menu_list -->
+</div>
+<!-- e : nav -->
+<div class="all_menu_bg"></div>
+
+<script>
+	$(document).ready(function() {
+		$('#menu_open').click(
+			function(){
+				$('#menu_area').animate({"right": "0px"}, 300, function(){
+					/* 
+					$('#menu_area').css({"position": "relative"});
+					$('#menu_area').css({"float": "right"});
+					$('#wrap').css({"position": "fixed"}); */
+				});
+				$('.all_menu_bg').css({"display": "block"});
+			}
+		);
+		$('#menu_close').click(
+			function(){
+				$('#menu_area').animate({"right": "-15.000em"}, 300, function(){
+					/* 
+					$('#menu_area').css({"position": "fixed"});
+					$('#menu_area').css({"float": "none"});
+					$('#wrap').css({"position": "static"}); */
+					$('.all_menu_bg').css({"display": "none"});
+				});
+			}
+		);
+	});
+</script>
+
+<!-- wrap -->
+<div id="wrap">
+	<!-- header -->
+	<div id="header">
+		<h1><a href="/"><img src="/img/common/logo.png" alt="내차82"></a></h1>
+		<span class="copy"><img src="/img/common/text_copy.png" alt="중고차 제값 박고 팔자!"></span>
+		<div class="btn">
+			<a href="/apps/bid/complain.php"><img src="/img/common/btn_notify.png" alt="신고하기"></a>
+		<?php if(isset($_COOKIE['deal_id'])) { ?>
+			<a href="/apps/info/deal_guide.php"><img src="/img/common/btn_guide.png" alt="이용안내"></a>
+		<?php }else{ ?>
+			<a href="/apps/info/bid_guide.php"><img src="/img/common/btn_guide.png" alt="이용안내"></a>
+		<?php } ?>	
+			
+			<a href="#" id="menu_open"><img src="/img/common/btn_all_menu.png" alt="전체메뉴"></a>
+		</div>
+	</div>
+	<!-- e : header -->

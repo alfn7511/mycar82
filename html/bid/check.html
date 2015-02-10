@@ -1,0 +1,93 @@
+<?php include _HTML_BASE . "/common/header.html"; ?>
+	<!-- container -->
+	<div class="container">
+		
+		<?php include _HTML_BASE . "/common/head_title.html"; ?>
+		
+		<!-- contents -->
+		<div class="contents check_bidding_cnt">
+			<!-- text_b01 -->
+			<dl class="text_b01">
+				<dt>입찰정보 확인</dt>
+				<dd>
+					고객님의 차량을 입찰완료하였습니다.<br/>
+					입찰번호로 해당 정보를 확인할 수 있습니다.
+				</dd>
+			</dl>
+			<!-- e : text_b01 -->
+
+			<!-- formbox -->
+			<div class="formbox">
+				<form id="bid_check_form" method="post">
+				<dl>
+					<dt><b>1. 입찰번호</b></dt>
+					<dd>
+						<div class="input"><input type="text" name="bid_code" id="bid_code"  value="예) B2015012619159019" onFocus="if(this.value=='예) B2015012619159019') this.value='';" onBlur="if(this.value=='') this.value='예) B2015012619159019';"></div>
+					</dd>
+			
+					<dt><b>2. 핸드폰 번호</b></dt>
+					<dd>
+						<div class="input"><input type="text" name="bid_phone" id="bid_phone"  value="예) 010-4567-8952" onFocus="if(this.value=='예) 010-4567-8952')this.value='';" onBlur="if(this.value=='')this.value='예) 010-4567-8952';"></div>
+					</dd>
+				</dl>
+				
+				<!-- button -->
+				<div class="button">
+					<a href="#" id="bid-check-btn">입찰정보확인</a>
+				</div>
+				<!-- e : button -->
+				</form>
+			</div>
+			<!-- e : formbox -->
+
+		</div>
+		<!-- e : contents -->
+				
+	</div>
+	<!-- e : container -->
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		//입찰요청
+		$("#bid-check-btn").click(function(e){
+			
+			e.preventDefault();
+			
+			if($("#bid_code").val()=="예) B2015012619159019"){
+				alert("입찰번호를 입력해주세요.");
+				$("#bid_code").focus();
+				return false;
+			}
+			
+			if($("#bid_phone").val()=="예) 010-4567-8952"){
+				alert("핸드폰번호를 입력해주세요.");
+				$("#bid_phone").focus();
+				return false;
+			}
+			
+			 $.ajax({
+				url:"/apps/bid/check_proc.php",
+				dataType:'json',
+				type:'POST',
+				data:{'bid_code':$("#bid_code").val(), 'bid_phone':$("#bid_phone").val()},
+				success:function(data){
+					if(data[0]['result']=="Y"){
+						//$("#bid_check_form").attr("action", "/apps/bid/register.php").submit();
+						$.cookie('bid_code', $("#bid_code").val(), { expires: 1 }, { path: "/" }, { domain: "<?=_COOKIE_DOMAIN?>" });
+						location.href = "/apps/bid/view.php?bid_code="+$("#bid_code").val();
+					}else{
+						alert("입찰번호나 핸드폰번호가 잘못되거나 없습니다.");
+						return false;
+					}
+				},
+				error:function(e) {	
+					console.log(e.responseText);
+				}	
+			  });			
+				
+		});
+	});
+//-->
+</script>
+	
+<?php include(_HTML_BASE . "/common/footer.html"); ?>

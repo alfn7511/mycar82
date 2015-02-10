@@ -1,0 +1,312 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="euc-kr">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+
+<title>폼타입 | 퍼블리싱가이드 | 알플러스코리아</title>
+<link rel="stylesheet" type="text/css" href="../css/default.css">
+<link rel="stylesheet" type="text/css" href="../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../css/guide.css">
+<link rel="stylesheet" type="text/css" href="/share/css/content.css">
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrapper">
+	<!-- ### container ### -->
+	<div id="container">
+		<div class="wrap-content guide">
+
+			<h1 class="guide">폼타입</h1>
+			<!-- 폼타입1 : 입력/신청 -->
+			<h2 class="guide">폼타입1(입력/신청) : .form-type1</h2>
+			<div class="form-type1">
+				<fieldset>
+					<p class="txt-top">상단 출력 문구 .txt-top</p>
+					<p class="txt-top txt-type4">상단 출력 문구 + 도트 : .txt-top.txt-type4</p>
+					<!-- 기본출력값 -->
+					<dl class="wrap">
+						<dt class="label">아이디</dt>
+						<dd class="form">abcdefg@naver.com</dd>
+					</dl>
+					<!-- //기본출력값 -->
+					<!-- 기본셀렉트 선택 -->
+					<div class="wrap">
+						<label class="label">문의유형<em class="txt-star">필수항목</em></label>
+						<div class="form">
+							<select class="select w50">
+								<option>제품상담</option>
+							</select>
+						</div>
+					</div>
+					<!-- //기본셀렉트 선택 -->
+					<!-- 텍스트 + PLACEHOLDER -->
+					<div class="wrap">
+						<label class="label">제목<em class="txt-star">필수항목</em></label>
+						<div class="form">
+							<label for="applyTitle" class="label form-txt">30자 이내로 작성해 주세요</label>
+							<input type="text" class="text w100 placeholder" id="applyTitle">
+						</div>
+					</div>
+					<!-- //텍스트 + PLACEHOLDER -->
+					<!-- 전화번호타입 -->
+					<div class="wrap">
+						<label class="label">연락처<em class="txt-star">필수항목</em></label>
+						<div class="form form-tel">
+							<select class="select" title="전화번호 지역번호(통신사번호)">
+								<option>010</option>
+							</select>
+							<span>-</span>
+							<input type="text" class="text" title="전화번호 국번">
+							<span>-</span>
+							<input type="text" class="text" title="전화번호 네자리">
+						</div>
+					</div>
+					<!-- //전화번호타입 -->
+					<!-- 텍스트입력영역 -->
+					<div class="wrap">
+						<label class="label">문의내용<em class="txt-star">필수항목</em></label>
+						<div class="form">
+							<textarea rows="10" cols="10" class="textarea w100"></textarea>
+						</div>
+					</div>
+					<!-- //텍스트입력영역 -->
+					<!-- 파일첨부 -->
+					<div class="wrap">
+						<label class="label">파일첨부</label>
+						<div class="form">
+							<div class="input-file">
+								<label for="formUpFile"><span>첨부파일등록</span></label>
+								<input type="file" class="file" id="formUpFile">
+								<span class="file-name"></span>
+							</div>
+						</div>
+					</div>
+					<!-- //파일첨부 -->
+					<!-- 이메일 + 인증버튼 -->
+					<div class="wrap">
+						<label class="label" for="formIdEmail1">아이디<em class="txt-star">필수항목</em></label>
+						<div class="form">
+							<div class="form-email">
+								<input type="text" class="text" id="formIdEmail1" title="이메일아이디">
+								<span class="unit">@</span>
+								<input type="text" class="text" id="formIdEmail2" title="이메일도메인">
+								<select class="select" id="formIdEmail3"  title="이메일도메인선택">
+									<option>직접입력</option>
+									<option>gmail.com</option>
+									<option>naver.com</option>
+								</select>
+								<span class="btn-type4"><a href="#none">이메일 인증받기</a></span>
+							</div>
+							<p class="mes">알플러스코리아 통합회원의 ID로 사용할 고객님의 이메일 주소를 입력해 주세요.</p>
+						</div>
+					</div>
+					<!-- //이메일 + 인증버튼 -->
+					<!-- 인증번호 -->
+					<div class="wrap">
+						<label class="label" for="formPolicyNum">이메일 인증번호 입력<em class="txt-star">필수항목</em></label>
+						<div class="form form-num">
+							<label for="formPolicyNum" class="label form-txt">인증번호6자리</label>
+							<input type="text" class="text placeholder" id="formPolicyNum">
+							<span class="btn-type4"><a href="#none">확인</a></span>
+							<em class="mes2">(유효시간 : <span>0.0</span>)</em>
+						</div>
+					</div>
+					<!-- //인증번호 -->
+					<!-- 이름 -->
+					<div class="wrap2">
+						<label class="label" for="formMemName">이름<em class="txt-star">필수항목</em></label>
+						<div class="form">
+							<input type="text" class="text w50" id="formMemName">
+						</div>
+					</div>
+					<!-- //이름 -->
+					<!-- 닉네임 -->
+					<div class="wrap2">
+						<label class="label" for="formMemNic">닉네임<em class="txt-star">필수항목</em></label>
+						<div class="form">
+							<input type="text" class="text w50" id="formMemNic">
+							<p class="mes">닉네임은 한글/영문자/숫자 4~8자 내외로 입력해 주세요.</p>
+						</div>
+					</div>
+					<!-- //닉네임 -->
+					<!-- 생년월일 -->
+					<div class="wrap">
+						<label class="label" for="formBirthY">생년월일<em class="txt-star">필수항목</em></label>
+						<div class="form form-date">
+							<select class="select" id="formBirthY"  title="생년월일(년도)">
+								<option>0000</option>
+							</select>
+							<span class="unit">년</span>
+							<select class="select" id="formBirthM"  title="생년월일(월)">
+								<option>00</option>
+							</select>
+							<span class="unit">월</span>
+							<select class="select" id="formBirthD"  title="생년월일(일)">
+								<option>00</option>
+							</select>
+							<span class="unit">일</span>
+						</div>
+					</div>
+					<!-- //생년월일 -->
+					<!-- 주소 -->
+					<div class="wrap">
+						<label class="label" for=" formZipcode1">주소<em class="txt-star">필수항목</em></label>
+						<div class="form form-zipcode">
+							<!-- 우편번호 -->
+							<div class="zip-code">
+								<input type="text" class="text" title="우편번호 앞3자리" id="formZipcode1">
+								<span class="unit">-</span>
+								<input type="text" class="text" title="우편번호 뒷3자리" id="formZipcode2">
+								<span class="btn-type4"><a href="#none">우편번호검색</a></span>
+							</div>
+							<!-- 주소구분 -->
+							<div class="zip-type">
+								<span class="label-radio">
+									<label for="chkAddrType1">집</label>
+									<input type="radio" name="address_type" class="radio" id="chkAddrType1" checked="checked">
+								</span>
+								<span class="label-radio">
+									<label for="chkAddrType2">직장</label>
+									<input type="radio" name="address_type" class="radio" id="chkAddrType2">
+								</span>
+							</div>
+							<!-- 상세주소 -->
+							<input type="text" class="text" id="addrText1" title="기본주소">
+							<input type="text" class="text" id="addrText2" title="상세주소1">
+							<input type="text" class="text" id="addrText3" title="상세주소2">
+						</div>
+					</div>
+					<!-- //주소 -->
+				</fieldset>
+				<ul class="form-sub txt-type2">
+					<li><em class="txt-star">필수항목</em> 표시는 필수 입력 항목 입니다. 반드시 입력해 주세요.</li>
+					<li>빠른 답변을 원하시는 경우에는 대표 전화번호 (080-854-0114) 를 이용해 주시기 바랍니다.</li>
+				</ul>
+				<fieldset class="form-sub con-type2">
+					<h2 class="tit3">개인정보 수집 &middot; 이용에 대한 동의 절차</h2>
+					<ol class="txt-type3">
+						<li><span>1.</span>개인정보의 수집, 이용목적 : 고객문의에 대한 답변</li>
+						<li><span>2.</span>개인정보 수집항목 : 이름, 휴대폰, 일반전화, E-mail, 서비스 이용기록</li>
+						<li><span>3.</span>개인정보의 보유 및 이용기간 : 개인정보의 수집 목적 또는 제공받은 목적이 달성되면, 개인정보를 파기합니다. 단, 상법 등 관련법령의 규정에 의하여 다음과 같이 거래관련 권리, 의무 관계의 확인 등을 이유로 보존할 필요성이 있는 경우에는예외로 합니다.</li>
+					</ol>
+					<div class="form-agree">
+						<span class="label-radio">
+							<label for="chkAgree1">동의합니다.</label>
+							<input type="radio" name="agree_select" class="radio" id="chkAgree1" checked="checked">
+						</span>
+						<span class="label-radio">
+							<label for="chkAgree2">동의하지 않습니다.</label>
+							<input type="radio" name="agree_select" class="radio" id="chkAgree2">
+						</span>
+					</div>
+				</fieldset>
+			</div>
+
+			<!-- 폼타입2 : 검색폼-->
+			<h2 class="guide">폼타입2(검색) : .form-type2</h2>
+			<div class="form-type2">
+				<fieldset>
+					<legend>매장검색</legend>
+					<div class="wrap">
+						<label for="searchArea1" class="label">지역 검색</label>
+						<div class="form form-select1">
+							<select class="select" id="searchArea1">
+								<option>시/도</option>
+							</select>
+							<select class="select" id="searchArea2">
+								<option>시/군구</option>
+							</select>
+						</div>
+					</div>
+					<div class="wrap2">
+						<span class="label">특화매장 검색</span>
+						<div class="form form-select2">
+							<span class="label-checkbox">
+								<label for="searchSpecial4"><span class="icon-store store1">백화점매장</span></label>
+								<input type="checkbox" name="search_special2" class="check" id="searchSpecial4">
+							</span>
+							<span class="label-checkbox">
+								<label for="searchSpecial5"><span class="icon-store store2">캠핑매장</span></label>
+								<input type="checkbox" name="search_special2" class="check" id="searchSpecial5">
+							</span>
+						</div>
+					</div>
+					<div class="wrap2">
+						<label for="searchStore" class="label">매장명 검색</label>
+						<div class="form form-textbtn">
+							<input type="text" class="text" id="searchStore">
+							<span class="btn-type1"><button type="submit">검색</button></span>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="form-type2">
+				<fieldset>
+					<legend>매장검색</legend>
+					<div class="wrap">
+						<label for="searchArea1" class="label">지역 검색</label>
+						<div class="form">
+							<select class="select w100" id="searchArea1">
+								<option>시/도</option>
+							</select>
+						</div>
+					</div>
+					<div class="wrap">
+						<span class="label">특화매장 검색</span>
+						<div class="form form-select2">
+							<span class="label-checkbox">
+								<label for="searchSpecial1"><span class="icon-store store">전체 매장</span></label>
+								<input type="checkbox" name="search_special" class="check" id="searchSpecial1">
+							</span>
+							<span class="label-checkbox">
+								<label for="searchSpecial2"><span class="icon-store store1">백화점매장</span></label>
+								<input type="checkbox" name="search_special" class="check" id="searchSpecial2">
+							</span>
+							<span class="label-checkbox">
+								<label for="searchSpecial3"><span class="icon-store store2">캠핑매장</span></label>
+								<input type="checkbox" name="search_special" class="check" id="searchSpecial3">
+							</span>
+						</div>
+					</div>
+					<div class="wrap">
+						<label for="searchStore" class="label">매장명 검색</label>
+						<div class="form">
+							<input type="text" class="text w100" id="searchStore">
+							<span class="btn-type1 btn"><button type="submit">검색</button></span>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<div class="form-type2">
+					<div class="wrap">
+						<label class="label" for="searchCate">카테고리검색</label>
+						<div class="form form-select3">
+							<select title="1차카테고리" id="searchCate1" class="select">
+								<option>여성의류</option>
+							</select>
+							<select title="2차카테고리" id="searchCate2" class="select">
+								<option>자켓/점퍼</option>
+							</select>
+							<select title="3차카테고리" id="searchCate3" class="select">
+								<option>방풍자켓</option>&gt;
+							</select>
+						</div>
+					</div>
+					<div class="wrap">
+						<label class="label" for="searchLine">제품라인별검색</label>
+						<div class="form form-select3">
+							<select id="searchLine" class="select">
+								<option>MOUNTAINEERING</option>
+							</select>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+
+</body>

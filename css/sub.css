@@ -1,0 +1,960 @@
+/**************************************
+0. 공통
+**************************************/
+input[type="text"], input[type="password"], select{ -webkit-border-radius:0; -webkit-appearance:none; }
+
+/** contents **/
+.contents{
+	background-color:#fff;
+	padding-bottom:1em; 
+	min-height:20em;
+	height:auto !important;
+	height:20em;
+}
+.contents .text_b01 { padding:0.625em 1.125em; border-bottom:1px solid #f0f0f0; }
+.contents .text_b01 dt { font-size:0.750em; color:#3d3d3d; font-family:'NanumGothicBold'; line-height:1.5em; }
+.contents .text_b01 dd { font-size:0.625em; color:#a5a5a5; line-height:1.35em; }
+/** content **/
+.content{ padding: 0 1.250em; }
+.content h3{
+	line-height: 1.35em;
+	letter-spacing: -0.05em;
+	font-weight:normal;
+}
+.content h3 b{
+	font-size: 0.750em;
+	font-weight: normal;
+	font-family: 'NanumGothicBold';
+	color: #3d3d3d;
+}
+.content .conbox{ margin-bottom:1em; }
+
+
+/**************************************
+1. 입찰 리스트
+**************************************/
+/** bidding_list **/
+.bidding_list{ padding:0.313em; }
+.bidding_list ul{width:100%;}
+.bidding_list li{float:left; width:50%; margin-bottom:0.313em; }
+.bidding_list .goods{ position:relative; margin:0 0.156em 0 0; }
+.bidding_list li:nth-child(2n) .goods{ margin:0 0 0 0.156em; } 
+.bidding_list .goods .img{ height:6.563em; overflow:hidden; }
+.bidding_list .goods .price{ position:relative; background:url(../img/main/bar_bg.png) repeat-x left top; background-size:auto 100%; height:1.625em; }
+.bidding_list .goods .price p{ line-height:1.625em; padding-left:0.5em; color:#585f79; }
+.bidding_list .goods .price p strong{ font-size:1.05em; font-family:'NanumGothicExtraBold'; letter-spacing:-0.05em;}
+.bidding_list .goods .price p strong span{ font-size:1.05em; font-family:'NanumGothicExtraBold'; letter-spacing:-0.05em;}
+.bidding_list .goods .price p span{ font-size:0.563em; font-family:'NanumGothicExtraBold'; }
+.bidding_list .goods .price .txt{position:absolute; right:0.5em; top:0.55em; color:#585f79; font-size:0.625em; font-family:'NanumGothicBold'; }
+.bidding_list .goods .tail{ background-color:#f8faf9; padding:0.375em; min-height:2.750em; }
+.bidding_list .goods .tail .subject{ font-size:0.688em; color:#31394e; font-family:'NanumGothicBold'; letter-spacing:-0.1em; line-height:1.15em; margin-bottom:0.25em; text-overflow:ellipsis; /*text-overflow:ellipsis-word;*/ overflow:hidden; white-space:nowrap;}
+.bidding_list .goods .tail .tag{ width:100%; margin-bottom:0.35em; }
+.bidding_list .goods .tail .tag span{ float:left; display:block; background-color:#6ba8d8; color:#fff; font-size:0.438em; line-height:1.929em; height:1.929em; padding:0 0.75em; margin-right:0.25em;}
+.bidding_list .goods .tail .oinfo{ width:100%; }
+.bidding_list .goods .tail .oinfo span{ display:block; font-size:0.563em; color:#6d7075; line-height:1em;}
+.bidding_list .goods .tail .oinfo .date{ float:left;}
+.bidding_list .goods .tail .oinfo .km{ float:right; color:#6d7075; font-family:'NanumGothicBold'; }
+.bidding_list .goods .icon_state{ position:absolute; left:0.250em; top:0.250em; width:1.813em; height:auto; }
+
+.menubox{padding:0.625em 0 1.250em 0; width:13.875em; margin:0 auto; }
+.menubox ul{width:100%; overflow:hidden; margin-bottom:0.375em;}
+.menubox ul li{ float:left; width:50%; text-align:center;  }
+.menubox ul li a{}
+.menubox ul li img{ width:6.625em; height:auto; }
+
+
+
+
+
+/**************************************
+2. 입찰중 - 상세
+**************************************/
+/** bid_visual **/
+.bx-wrapper{
+	position: relative;
+	background: #666;
+}
+.bx-wrapper .bx-controls{
+	position: absolute;
+	top: 50%;
+	left:0;
+	width:100%;
+}
+.bx-controls:before, .bx-controls:after { content: ""; display: table;}
+.bx-controls:after { clear: both; }
+
+.bx-wrapper .bx-controls .bx-controls-direction a{
+	position: absolute;
+	display: block;
+	font-size: 1em;
+	margin: 0;
+	padding: 0;
+	width: 2.156em;
+	height: 2.156em;
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-size: 100% auto;
+	margin-top: -1.078em;
+	border-radius: 0;
+	text-indent: -5000px;
+	overflow: hidden;
+	background-color: transparent;
+	z-index: 999;	
+}	
+.bx-wrapper .bx-controls .bx-controls-direction .bx-prev{
+	left: 0;
+	background-image: url(/img/sub/btn_prev.png);
+}
+.bx-wrapper .bx-controls .bx-controls-direction .bx-next{
+	right: 0;
+	background-image: url(/img/sub/btn_next.png);
+}
+
+/** bid_item **/
+.bid_item{
+	padding:0.438em 0.313em;
+	margin-bottom:0.5em;
+}
+/* gallerybox */
+.bid_item .gallerybox{
+	position:relative;
+}
+.gallerybox .owl-theme .owl-controls .owl-nav{}
+.gallerybox .owl-theme .owl-controls .owl-nav div,
+.gallerybox .owl-theme .owl-controls .owl-nav [class*=owl-]{
+	position:absolute;
+	top:50%;
+	display:block;
+	font-size:1em;
+	margin:0; padding:0;
+	width:2.156em; height:2.156em;
+	background-repeat:no-repeat;
+	background-position:center top;
+	background-size:100% auto;
+	margin-top:-1.078em;
+	border-radius:0;
+	text-indent:-5000px;
+	overflow:hidden;
+	background-color:transparent;
+	z-index:999;
+}
+.gallerybox .owl-theme .owl-controls .owl-nav .owl-prev{ left:0; background-image:url(../img/sub/btn_prev.png);}
+.gallerybox .owl-theme .owl-controls .owl-nav .owl-next{ right:0; background-image:url(../img/sub/btn_next.png);}
+.gallerybox .owl-theme .owl-controls .owl-dots{ display:none !important; }
+.bid_item .gallerybox .page_num{position:absolute; right:0.5em; bottom:0.35em; z-index:999; color:#fff; font-size:0.938em;}
+.gallerybox .item_state{
+	display:block;
+	position:absolute;
+	left:0.313em; top:0.313em;
+	z-index:999;
+	width:1.813em; height:1.813em;
+}
+
+/* info */
+.bid_item .state{ background-color:#919db2; height:1.250em; line-height:1.250em; color:#f0f0f0; }
+.bid_item .state .time{
+	float:left;
+	font-size:0.625em;
+	padding-left:1.35em;
+}
+.bid_item .state .time b{
+	font-weight:normal;
+	font-family:'NanumGothicBold';
+}
+.bid_item .state .count{
+	float:right;
+	font-size:0.625em;
+	padding-right:1em;
+}
+.bid_item .state .count b{
+	font-weight:normal;
+	font-family:'NanumGothicExtraBold';
+}
+.bid_item .price{ 
+	background-color:#f0f0f0; 
+	color:#3d3d3d;
+	font-size:0.938em;
+	height:1.800em; 
+	line-height:1.800em;
+	padding-left:0.75em;
+}
+.bid_item .price b{
+	color:#ff0013;
+	font-weight:normal;
+	font-family:'NanumGothicExtraBold';
+}
+
+/* subject_box */
+.subject_box{ 
+	padding:0 0.750em 0.813em 0.750em; 
+	border-bottom:1px solid #f0f0f0;
+	margin-bottom:1em;
+}
+.subject_box .item_name{
+	font-family:'NanumGothicExtraBold';
+	font-size:0.938em;
+	color:#454a53;
+	letter-spacing:-0.1em;
+}
+.subject_box .info{ width:100%; overflow:hidden; }
+.subject_box .info:after{display:block; clear:both; height:0; content:"";}
+.subject_box .info p{
+	display:inline-block;
+	font-size:0.625em;
+	line-height:1.75em;
+	letter-spacing:-0.1em;
+}
+.subject_box .info span.tag{
+	display:inline-block; 
+	background-color:#6ba8d7;
+	font-size: 0.438em;
+	color:#fff;
+	line-height: 1.929em;
+	height: 1.929em;
+	padding: 0 0.75em;
+	vertical-align:middle;
+}
+
+/* car_info */
+.car_info{}
+.car_info table{}
+.car_info table td{
+	color:#3d3d3d;
+	font-size:0.625em;
+	border:0.100em solid #f0f0f0;
+	font-family:'NanumGothicBold';
+	padding:0.250em 1em;
+	line-height:1.35em;
+}
+.etc_notice{
+	font-size:0.625em;
+	padding:1em;
+	border:0.100em solid #f0f0f0;
+	color:#34302d;
+	line-height:1.35em;
+}
+
+
+
+
+
+/**************************************
+3. 내차 입찰
+**************************************/
+/* formbox */
+.formbox {  }
+.formbox dl { padding:0 1.250em; border-top:1px solid #f0f0f0; }
+.formbox dl:first-child{border-top:0;}
+.formbox dl dt { line-height:1.35em; letter-spacing:-0.05em; }
+.formbox dl dt b { font-size:0.750em; font-weight:normal; font-family:'NanumGothicBold';  color:#3d3d3d; }
+.formbox dl dt span { color:#3d3d3d; font-size:0.625em; }
+.formbox dl dd { padding-bottom:0.750em; letter-spacing:-0.05em;}
+.formbox dl dd .input{}
+.formbox dl dd .input input[type="password"],
+.formbox dl dd .input input[type="text"]{ 
+	font-size: 0.625em;
+	color: #a5a5a5;
+	font-family:'NanumGothic';
+	width:100%;
+	border:0.100em solid #f0f0f0;
+	line-height:1.15em;
+	margin:0;
+	padding:0.500em 0.900em;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.formbox dl dd .input input[type="password"]:focus,
+.formbox dl dd .input input[type="text"]:focus{ border:0.100em solid #2c9dde; }
+
+.formbox dl dd .comment{
+	font-size: 14px;
+	color:#ff0000;
+}
+
+.formbox dl.tit_add{ 
+	padding:0.625em 1.125em;
+}
+.formbox dl.tit_add dd{
+	font-size:0.625em;
+	color:#a5a5a5;
+	font-family:'NanumGothic';
+}
+.formbox dl dd .selectbox {
+	position:relative;
+	font-size: 0.625em;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+	border:0.100em solid #f0f0f0;
+	background-image:url(../img/sub/icon_arrow.png);
+	background-repeat:no-repeat;
+	background-position: right top;
+	background-size:auto 100%;
+	height:2.35em;
+	width:100%;
+	overflow:hidden;
+}
+.formbox dl dd .selectbox select{
+	position:absolute;
+	left:0; top:0;
+	display:block;
+	width:100%;
+	font-size: 1em;
+	line-height:1em;
+	color: #a5a5a5;
+	font-family:'NanumGothic';
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	-o-box-sizing:content-box;
+	-ms-box-sizing:content-box;
+	box-sizing:content-box;
+	margin:0; border:0;
+	background:transparent;
+	padding:0.500em 0.900em;
+}
+/* photo_car */
+.formbox dl dd .photo_car{}
+.formbox dl dd .photo_car ul{ width:100%; overflow:hidden; }
+.formbox dl dd .photo_car ul:after{display:block; clear:both; height:0; content:"";}
+.formbox dl dd .photo_car ul li{
+	float:left; 
+	width:25%;
+}
+.formbox dl dd .photo_car ul li .image { 
+	position:relative;
+	border:0.063em solid #f0f0f0;
+	margin:0 0.156em; 
+	height:2.563em;
+	background-repeat:no-repeat;
+	background-position:center 50%;
+	background-size:100% auto;
+}
+.formbox dl dd .photo_car ul li .image input{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height:100%;
+	line-height:100%;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.formbox dl dd .photo_car ul li .image img{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height:100%;
+	line-height:100%;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.formbox dl dd .photo_car ul li .text { font-size:0.500em; text-align:center; font-family:'NanumGothicBold'; color:#3d3d3d; }
+.textarea{
+	overflow:hidden;
+}
+.textarea textarea{
+	width:100%; font-size:0.625em; 
+	height:15em; line-height:1.35em; 
+	color: #a5a5a5; 
+	font-family:'NanumGothic'; 
+	padding:0.65em 1.200em; margin:0; 
+	border:0.100em solid #f0f0f0;
+	resize:none; 
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.textarea textarea:focus{ border:0.100em solid #2c9dde; }
+/* option */
+.option_box{}
+.option_box table{}
+.option_box th,
+.option_box td{
+	font-size:0.500em;
+	color:#3d3d3d;
+	padding:0.25em;
+}
+.option_box th{
+	background-color:#c1c1c1;
+	border:1px solid #fff;
+}
+.option_box td{ }
+.option_box td input[type="checkbox"]{
+	vertical-align:middle;
+	border-right:1px solid #c1c1c1;
+}
+.option_box td label{ 
+	letter-spacing:-0.1em;
+	font-family:'NanumGothicBold';
+}
+.option_box .item1 th{
+	border:1px solid #c1c1c1;
+}
+
+/* u_info */
+.formbox dl dd.u_info{padding-top:0.35em;}
+.formbox dl dd.u_info .name,
+.formbox dl dd.u_info .tel{ width:100%; overflow:hidden; }
+.formbox dl dd.u_info .tel:after{display:block; clear:both; height:0; content:"";}
+.formbox dl dd.u_info .name{margin-bottom:0.35em;}
+.formbox dl dd.u_info .tit{ float:left; padding-top:0.20em;}
+.formbox dl dd.u_info .tit b{ color:#4a5dc4; font-size:0.625em; line-height:1em;}
+.formbox dl dd.u_info .con{ margin-left:3.750em; }
+.formbox dl dd.u_info .tel .con .selectbox{ display:inline-block; width:30%; vertical-align:middle;}
+.formbox dl dd.u_info .tel .con .input{ display:inline-block; width:33%; vertical-align:middle;}
+/* notice */
+.formbox dl dd.notice {}
+.formbox dl dd.notice p {
+	font-size:0.625em;
+	text-indent:-1em;
+	padding-left:1em;
+	color:#3d3d3d;
+	font-family:'NanumGothicBold'; 
+	line-height:1.50em;
+}
+.formbox dl dd.notice p em{ color:#4a5dc4; font-style:normal; }
+/* terms */
+.formbox dl dd .terms{ 
+	position:relative;
+	font-size:0.625em;
+	color:#3d3d3d;
+	font-family:'NanumGothicBold'; 
+}
+.formbox dl dd .terms input[type="checkbox"]{ 
+	border:1px solid #555; 
+	padding:0; margin:0; 
+	width:2em; height:2em; 
+	vertical-align:middle; 
+	margin-right:1em; 
+}
+.formbox dl dd .terms label{cursor:pointer;}
+.formbox dl dd .terms .btn_view_terms{
+	position:absolute; 
+	right:0; top:0;
+	display:block;
+	background-color:#3f4040;
+	color:#fff;
+	font-size:1em; line-height:1.5em;
+	padding:0 1em;
+}
+.formbox .button{ padding: 1em 1.250em 0.5em 1.250em; }
+.formbox .button a{
+	display:block;
+	background-color:#fd4238;
+	font-size:0.688em;
+	font-family:'NanumGothicBold'; 
+	color:#fff;
+	text-align:center;
+	padding:1em;
+	border:0.091em solid #f0f0f0;
+}
+
+.formbox .button button[type='submit']{
+	display:block;
+	width:100%;
+	background-color:#fd4238;
+	font-size:0.688em;
+	font-family:'NanumGothicBold'; 
+	color:#fff;
+	text-align:center;
+	padding:1em;
+	border:0.091em solid #f0f0f0;
+	cursor:pointer;
+}
+
+.formbox .text_notice{ 
+	font-size:0.625em;
+	color:#3d3d3d;
+	text-align:center;
+	padding-bottom:2em;
+}
+.ad_box{padding-bottom:0.094em;}
+
+
+
+
+
+
+/**************************************
+4. 신고하기
+**************************************/
+.notify_cnt .formbox .button{ padding:0em 1.250em 1.5em 1.250em; }
+
+
+
+
+
+/**************************************
+5. 입찰확인
+**************************************/
+.didding_list { }
+.didding_list .level_info { }
+.didding_list .level_info ul { border-top:1px solid #e1e2e6; }
+.didding_list .level_info ul li { 
+	width:100%;
+	border:1px solid #e1e2e6;
+	border-top:0;
+	padding:0.188em 0;
+}
+.didding_list .level_info ul li:after{display:block; clear:both; height:0; content:"";}
+.didding_list .level_info ul li span { float:left; display:block; height:2.063em; line-height:2.063em; vertical-align:middle; }
+.didding_list .level_info ul li span img{ vertical-align:middle; }
+.didding_list .level_info .level { padding-left:0.625em;}
+.didding_list .level_info .level img { width:2.063em; height:auto; vertical-align:top }
+.didding_list .level_info .name { width:3.500em; text-align:center; color:#3d3d3d; }
+.didding_list .level_info .name b{ font-size:0.750em; font-weight:normal; font-family:'NanumGothicBold';  }
+.didding_list .level_info .type { margin-right:0.250em; }
+.didding_list .level_info .type img { width:auto; height:0.625em; }
+.didding_list .level_info .info { text-align:right; }
+.didding_list .level_info .info img { width:auto; height:1.031em; }
+.didding_list .level_info .price { 
+	color:#ff0013;
+	text-align:right;
+	float:right;
+	padding-right:0.5em;
+	letter-spacing:-0.1em;
+}
+.didding_list .level_info .price b{
+	font-size:0.688em;
+	font-weight:normal;
+	font-family:'NanumGothicBold'; 
+}
+.didding_list .level_info .price img{ width:1.438em; height:auto; }
+.didding_list .level_info .checkbox { float:right; padding-right:0.5em; }
+.didding_list .text {
+	text-align:center;
+	font-size:0.625em;
+	line-height:1.5em;
+	color:#454a53;
+	padding:1.500em 0;
+	letter-spacing:-0.1em;
+}
+.didding_list .button { }
+.didding_list .button a { 
+	display: block;
+	background-color: #fd4238;
+	font-size: 0.688em;
+	font-family: 'NanumGothicBold';
+	color: #fff;
+	text-align: center;
+	padding: 1em;
+	border: 0.091em solid #f0f0f0;
+}
+.button_check{ margin-top:1.5em;}
+
+.didding_list .level_info .no1 .price b{ font-size:0.750em; }
+
+
+
+/**************************************
+6. 구매완료_후기작성
+**************************************/
+.notice_exp { 
+	background-color:#f0f0f0;
+	padding:0.438em;
+}
+.notice_exp .tit { 
+	display:block;
+	color:#ff0013;
+	font-size:0.563em;
+	text-align:left;
+	line-height:1.45em;
+	font-family:'NanumGothicBold'; 
+}
+.notice_exp .cnt { 
+	color:#919db2;
+	font-size:0.563em;
+	text-align:left;
+	line-height:1.45em;
+}
+/* postscript_box */
+.postscript_box{}
+.postscript_box .text{ text-align:center; color:#454a53; font-size:0.625em; line-height:1.5em; margin-bottom:2em; }
+.postscript_list{}
+.postscript_list li{padding-bottom: 20px; }
+.postscript_list li .top{
+	width: 100%;
+	overflow:hidden;
+	margin-bottom: 0.250em;
+}
+.postscript_list li .top span{
+	line-height: 1em;
+	color: #3d3d3d;
+	font-family: 'NanumGothicBold';
+}
+.postscript_list li .top .name{
+	float: left;
+	font-size: 0.750em;
+}
+.postscript_list li .top .date{
+	float: right;
+	font-size: 0.563em;
+	padding-top: 0.25em;
+}
+.postscript_list li .con{ 
+	padding: 1em 1.25em;
+	background-color: #f0f0f0;
+	font-size: 0.625em;
+	color: #000;
+	line-height: 1.35em;
+}
+.postscript_write{  }
+.postscript_write dl { padding:0; }
+.postscript_write dl dt em{ font-style:normal; color:#6ba8d7; }
+.postscript_write dl dd.last{padding-bottom:0.125em;}
+.postscript_write .button{ padding:0; }
+
+
+
+
+
+/**************************************
+7. 로그인
+**************************************/
+
+
+
+
+/**************************************
+8. 이용안내
+**************************************/
+
+
+
+
+/**************************************
+9. 개인정보취급방침
+**************************************/
+.terms_form{
+	padding: 2em 1.250em;
+}
+.terms_form h3{ font-size:1em; line-height:1.35em; margin-bottom:1em; font-family:'NanumGothicBold'; }
+.terms_form h4{ font-size:0.750em; line-height:1.35em; margin-bottom:0.5em; }
+.terms_form h5{ font-size:0.625em; margin-bottom:0.5em; }
+.terms_form .text01{ font-size:0.625em; line-height:1.35em; margin-bottom:2em;}
+.terms_form .textarea{ margin-bottom:2em; }
+.terms_form .button{ border:0.063em solid #f0f0f0; }
+.terms_form .button a{ 
+	display:block;
+	background-color:#0098cd;
+	font-size:0.688em;
+	text-align:center;
+	color:#fff;
+	font-family:'NanumGothicBold';
+	height:3.318em;
+	line-height:3.318em;
+}
+
+
+/**************************************
+10. 딜러회원 로그인
+**************************************/
+
+
+
+/**************************************
+11. 딜러회원가입
+**************************************/
+.formbox dl dd.pic { position:relative; width:100%; }
+.formbox dl dd.pic:after { display:block; clear:both; height:0; content:""; }
+.formbox dl dd.pic .input { float:left; display:block; position:relative; width:100%;}
+.formbox dl dd.pic .btn_find { float:right; display:block; width:30%; background-color:#717171; font-size:0.625em; line-height:2.250em; height:2.250em; color:#fff; text-align:center; }
+.formbox dl dd.pic .input input[type='text']{display:block; position: absolute; top:0; left:0; width:68%;}
+.formbox dl dd.pic .input input[type='file']{display:block; position: absolute; top:0; right:0; width:30%; height: 100%; line-height: 100%; cursor:pointer; z-index:999; opacity: 0;}
+
+
+
+/**************************************
+12. 입찰중
+**************************************/
+.dealer_bidding_list{}
+.dealer_bidding_list ul{}
+.dealer_bidding_list ul li{ padding:0.313em; border-bottom:1px solid #cdd2d5; cursor:pointer; }
+.dealer_bidding_list ul li .goods{}
+.dealer_bidding_list ul li .goods .img{ float:left; width:6.250em; }
+.dealer_bidding_list ul li .goods .info{
+	margin-left:6.375em;
+}
+.dealer_bidding_list ul li .goods .top{
+	position: relative;
+	background: url(../img/main/bar_bg.png) repeat-x left top;
+	background-size: auto 100%;
+	height: 1.875em; line-height:1.875em; 
+}
+.dealer_bidding_list ul li .goods .top .time{
+	float:left;
+	font-size:1.250em;
+	color:#585f79;
+	font-family:'NanumGothicExtraBold';
+	padding-left:0.25em;
+}
+.dealer_bidding_list ul li .goods .top .price{
+	float:left;
+	color:#585f79;
+	font-family:'NanumGothicExtraBold';
+	padding-left:0.25em;
+}
+
+.dealer_bidding_list ul li .goods .top .price>strong{
+	font-size:1.250em;
+}
+
+.dealer_bidding_list ul li .goods .top .price>span{
+	font-size: 0.563em;
+}
+
+.dealer_bidding_list ul li .goods .top .txt{
+	float:right;
+	display:block;
+	font-size:0.625em; 
+	color:#585f79;
+	padding-right:0.25em;
+}
+
+.dealer_bidding_list ul li .goods .tail{ position:relative; padding-left:0.1em;}
+.dealer_bidding_list ul li .goods .tail .subject{ 
+	font-family:'NanumGothicBold';
+	font-size:0.688em;
+	color:#31394e;
+	line-height:1.45em;
+	padding-top:0.1em;
+	text-align:left;
+}
+.dealer_bidding_list ul li .goods .tail .date{
+	color:#6d7075;
+	font-size:0.563em;
+	line-height:1.35em;
+}
+.dealer_bidding_list ul li .goods .tail .address{
+	color:#6d7075;
+	font-size:0.563em;
+	line-height:1.35em;
+}
+.dealer_bidding_list ul li .goods .tail .tag{ position:absolute; right:0; top:0; }
+.dealer_bidding_list ul li .goods .tail .tag span{
+	float:left;
+	display:inline-block;
+	background-color:#6ba8d8;
+	color:#fff;
+	font-size:0.438em;
+	padding:0.25em 0.75em;
+	margin-left:0.1em;
+	line-height:1.5em;
+}
+
+
+
+
+
+/**************************************
+13. 상세정보
+**************************************/
+.bid_input{
+	padding:0.938em 0;
+	border-bottom:1px solid #f0f0f0;
+}
+.bid_input .mbox{
+	position:relative;
+	-webkit-border-radius:2.25em;
+	-moz-border-radius:2.25em;
+	-ms-border-radius:2.25em;
+	-o-border-radius:2.25em;
+	border-radius:2.25em;
+	overflow:hidden;
+	height:2.688em;
+	border:0.063em solid #919db2;
+	box-shadow:inset 0.075em 0.075em 0.2em #555;
+	background-color:#f0f0f0;
+}
+.bid_input .mbox .bid_price{
+	width:6.40em;
+	height:2.688em; line-height:2.688em;
+	text-align:right;
+}
+.bid_input .mbox .bid_price strong{
+	font-family:'NanumGothicBold';
+	font-size:1.406em;
+	letter-spacing:-0.1em;
+}
+.bid_input .mbox .bid_price span{
+	font-family:'NanumGothicBold';
+	font-size:0.438em;
+}
+.bid_input .mbox .buttonbox{
+	position:absolute; 
+	right:0.5em; top:50%;
+	margin-top:-1.175em;
+}
+.bid_input .mbox .buttonbox a{
+	display:block;
+	float:left;
+	margin-right:0.1em;
+	font-family:'NanumGothicBold';
+	color:#fff;
+	width:2.313em; height:2.313em;
+	line-height:2.1em;
+	border-radius:2em;
+	background-color:#576680;
+	overflow:hidden;
+	text-align:center;
+}
+.bid_input .mbox .buttonbox a span{
+	display:inline-block;
+	font-size:0.625em;
+	vertical-align:middle;
+	line-height:1em;
+}
+.bid_input .mbox .buttonbox a.reset{
+	background-color:#6b9cd9;
+}
+.bid_input .mbox .buttonbox a.reset span{
+	font-size:0.500em;
+	line-height:1.35em;
+}
+.bid_input .button{
+	padding:1.563em 0.938em;
+}
+.bid_input .button a{
+	display:block;
+	font-size:0.688em;
+	border:0.091em solid #f0f0f0;
+	background-color:#fd4238;
+	text-align:center;
+	color:#fff;
+	font-family:'NanumGothicBold';
+	height:3.409em; line-height:3.409em;
+}
+
+
+
+/**************************************
+16. 딜러 소비자에게-선택받은딜러
+**************************************/
+.customer_info{
+	padding:0.938em 0.938em;
+	border-bottom:1px solid #f0f0f0;
+}
+.customer_info .mbox{
+	position:relative;
+	-webkit-border-radius:2.25em;
+	-moz-border-radius:2.25em;
+	-ms-border-radius:2.25em;
+	-o-border-radius:2.25em;
+	border-radius:2.25em;
+	overflow:hidden;
+	height:2.688em;
+	line-height:2.688em;
+	border:0.063em solid #919db2;
+	box-shadow:inset 0.075em 0.075em 0.2em #555;
+	background-color:#f0f0f0;
+	text-align:center;
+}
+.customer_info .mbox .text{}
+.customer_info .mbox .text strong{
+	font-size:0.938em;
+	font-weight:normal;
+	font-family:'NanumGothicBold';
+}
+.customer_info .mbox .text span{
+	font-size:0.938em;
+}
+
+/* button */
+.customer_info .button{
+	padding:1.563em 0 4.688em 0;
+}
+.customer_info .button a{
+	display:block;
+	font-size:0.688em;
+	border:0.091em solid #f0f0f0;
+	background-color:#fd4238;
+	text-align:center;
+	color:#fff;
+	font-family:'NanumGothicBold';
+	height:3.409em; line-height:3.409em;
+}
+
+
+
+/**************************************
+17. 내정보
+**************************************/
+.my_info_cnt{}
+.my_info_cnt .section{
+	border-bottom:1px solid #c2c2c4;
+	padding:1.125em;
+}
+.my_info_cnt .section:nth-child(3){border-bottom:0;}
+.my_info_cnt h3{
+	font-family:'NanumGothicBold';
+	font-size:0.938em;
+	color:#454a53;
+	line-height:1.35em;
+	margin-bottom:1em;
+}
+.my_info_cnt{}
+.my_info_cnt dl.basic{}
+.my_info_cnt dl.basic span{
+	display:inline-block;
+	font-size:0.625em;
+	color:#454a53;
+	vertical-align:middle;
+}
+.my_info_cnt dl.basic dt,
+.my_info_cnt dl.basic dd{
+	line-height:1.25em;
+}
+.my_info_cnt dl.basic dt span{
+	font-family:'NanumGothicBold';
+}
+.my_info_cnt dl.basic dt{ float:left; }
+.my_info_cnt dl.basic dd{ margin-left:4.875em; }
+.my_info_cnt dl.basic dd:after{display:block; clear:both; height:0; content:"";}
+.my_info_cnt dl.basic dd span.flag{
+	width:2.900em;
+	margin-left:0.25em;
+}
+.my_info_cnt .pic{
+	text-align:center;
+	margin-bottom:0.5em;
+}
+.my_info_cnt .pic span{
+	display:inline-block;
+	width:5.375em; height:4.313em;
+	background-color:#999a9c;
+	overflow:hidden;
+	background-repeat:no-repeat;
+	background-position:center 50%;
+	cursor:pointer;
+}
+.my_info_cnt .text{
+	font-size:0.625em;
+	text-align:center;
+	color:#454a53;
+	line-height:1.5em;
+}
+.my_info_cnt .textarea{
+	font-size:0.625em;
+	background-color:#ecedee;
+	padding:1em;
+	color:#454a53;
+	line-height:1.45em;
+}
+
+
+/**************************************
+18. 내 후기 보기
+**************************************/
+.my_postscript_cnt .postscript_list{padding-top:1em;}
+.my_postscript_cnt .postscript_list li{ margin-bottom:0.938em; }
+

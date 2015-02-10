@@ -1,0 +1,532 @@
+<?php include _HTML_BASE . "/adm/common/header.html"; ?>
+<!-- container -->
+<div id="container">
+	<div id="content">
+		<?php include _HTML_BASE . "/adm/common/menu.html"; ?>
+		<div id="section">
+			<!--  # 페이지타이틀  -->
+			<h1>입찰정보상세보기</h1>
+			<!--  # 현재페이지경로  -->
+			<dl class="path">
+				<dt>현재페이지경로</dt>
+				<dd><a href="#none">HOME</a><span>&gt;</span><a href="#none">입찰정보관리</a><span>&gt;</span><strong>입찰정보상세보기</strong></dd>
+			</dl>
+
+			<!-- # 테이블 : 폼형태 -->
+			<form id="bid_reg_form" method="post" enctype="multipart/form-data" action="/apps/bid/register_proc.php">
+			<?=$output['body']['hidden_cmd_reg']?>
+			<table class="tbl-form">
+			<tbody>
+				<tr>
+					<th>차량명</th>
+					<td colspan="7"><input type="text" name="bid_car_name" id="bid_car_name" class="text w80" maxlength="20"></td>
+				</tr>
+				<tr>
+					<th>제조사</th>
+					<td><input type="text" name="bid_maker" id="bid_maker" class="text" maxlength="20"></td>					
+					<th>연식/월</th>
+					<td><input type="text" name="bid_car_age" id="bid_car_age" class="text" maxlength="20"></td>
+					<th>차량번호</th>
+					<td><input type="text" name="bid_car_num" id="bid_car_num" class="text" maxlength="20"></td>
+					<th> </th>
+					<td> </td>
+				</tr>
+				<tr>
+					<th>주행거리</th>
+					<td><input type="text" name="bid_mileage" id="bid_mileage" class="text" maxlength="20"></td>
+					<th>배기량</th>
+					<td><input type="text" name="bid_capacity" id="bid_capacity" class="text" maxlength="20"></td>
+					<th>변속기</th>
+					<td>
+								<select name="bid_transmission" id="bid_transmission" class="select">
+									<option value="0">자동</option>
+									<option value="1">수동</option>
+								</select>						
+					</td>
+					<th>연료</th>
+					<td>
+								<select name="bid_fuel" id="bid_fuel" class="select">
+									<option value="0">휘발류</option>
+									<option value="1">경유</option>
+								</select>						
+					</td>
+				</tr>
+				<tr>
+					<th>판매지역</th>
+					<td><input type="text" name="bid_sales_area" id="bid_sales_area" class="text" maxlength="20"></td>
+					<th>이름</th>
+					<td><input type="text" name="bid_name" id="bid_name" class="text" maxlength="20"></td>
+					<th>연락처</th>
+					<td>
+						
+						<?=$output['body']['bid_phone1']?>
+						<input type="text" name="bid_phone2" id="bid_phone2" class="text phone">
+						<input type="text" name="bid_phone3" id="bid_phone3" class="text phone">
+					</td>
+					<th>삭제여부</th>
+					<td>
+								<select name="bid_del_yn" id="bid_del_yn" class="select">
+									<option value="N">아니오</option>
+									<option value="Y">예</option>
+									
+								</select>						
+					</td>
+				</tr>
+				
+				<tr>
+					
+					<th>사고 유무</th>
+					<td>
+								<select name="bid_accident_check" id="bid_accident_check" class="select">
+									<option value="0">무사고</option>
+									<option value="1">사고</option>
+								</select>						
+					</td>
+					<th>차주 변경 유무</th>
+					<td>
+								<select name="bid_car_owner_check" id="bid_car_owner_check" class="select">
+									<option value="0">없음</option>
+									<option value="1">1인 신조</option>
+									<option value="2">2인 신조</option>
+									<option value="3">3인 신조</option>
+									<option value="4">4인 신조</option>
+								</select>						
+					</td>
+					<th>요청시간</th>
+					<td>
+								<select name="bid_request_time" id="bid_request_time" class="select">
+								<?php for ($hr=1; $hr <= 24 ; $hr++) {?>
+									<option value="<?=$hr?>"><?=$hr?>시간</option>
+								<?php } ?>
+								</select>			
+					</td>
+					<th>승인여부</th>
+					<td>
+								<select name="bid_state" id="bid_state" class="select">
+									<option value="0">요청</option>
+									<option value="1">승인</option>
+									<option value="2">진행중</option>
+									<option value="3">완료</option>
+								</select>							
+					</td>
+					
+					
+				</tr>
+				<tr>
+					<th>차량사진</th>
+					<td colspan="7">
+							<!-- photo_car -->
+							<div class="photo_car">
+								<ul>
+									<li>
+										<div class="image" id="bid_car_img1">
+											<img src="<?=$bid_car_img[0]?>"   alt='앞면과 측면'/>
+											<input type="file" name="bid_car_img1"/>
+										</div>
+										<p class="text">앞면과 측면</p>
+									</li>
+									<li>
+										<div class="image" id="bid_car_img2">
+											<img src="<?=$bid_car_img[1]?>"   alt='뒷면과 측면'/>
+											<input type="file" name="bid_car_img2"/>
+										</div>
+										<p class="text">뒷면과 측면</p>
+									</li>
+									<li>
+										<div class="image" id="bid_car_img3">
+											<img src="<?=$bid_car_img[2]?>"   alt='시트/변속기/네비'/>
+											<input type="file" name="bid_car_img3"/>
+										</div>
+										<p class="text">시트/변속기/네비</p>
+									</li>
+									<li>
+										<div class="image" id="bid_car_img4">
+											<img src="<?=$bid_car_img[3]?>" alt='주행거리'/>
+											<input type="file" name="bid_car_img4"/>
+										</div>
+										<p class="text">주행거리</p>
+									</li>
+								</ul>
+							</div>
+							<!-- e : photo_car -->			
+					</td>
+				</tr>
+				<tr>
+					<th>추가사진</th>
+					<td colspan="7">
+							<!-- photo_car -->
+							<div class="photo_car">
+								<ul>
+									<li>
+										<div class="image" id="bid_car_img5">
+											<img src="<?=$bid_car_img[4]?>" alt="추가사진1"/>
+											<input type="file" name="bid_car_img5"/>
+										</div>
+										<p class="text">추가사진1</p>
+									</li>
+									<li>
+										<div class="image" id="bid_car_img6">
+											<img src="<?=$bid_car_img[5]?>" alt="추가사진2" />
+											<input type="file" name="bid_car_img6"/>
+										</div>
+										<p class="text">추가사진2</p>
+									</li>
+									<li>
+										<div class="image" id="bid_car_img7">
+											<img src="<?=$bid_car_img[6]?>" alt="추가사진3" />
+											<input type="file" name="bid_car_img7"/>
+										</div>
+										<p class="text">추가사진3</p>
+									</li>
+									<li>
+										<div class="image" id="bid_car_img8">
+											<img src="<?=$bid_car_img[7]?>" alt="추가사진4" />
+											<input type="file" name="bid_car_img8"/>
+										</div>
+										<p class="text">추가사진4</p>
+									</li>
+								</ul>
+							</div>
+							<!-- e : photo_car -->						
+					</td>
+				</tr>
+				<tr>
+					<th>기타사항</th>
+					<td colspan="7"><textarea name="bid_etc" id="bid_etc" class="textarea" rows="10"><?=$bid_etc?></textarea></td>
+				</tr>
+				<tr>
+					<th colspan="2">내/ 외장 옵션</th>
+					<th colspan="2">편의장치</th>
+					<th colspan="2">안전장치</th>
+					<th colspan="2">내/ 외장 옵션</th>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<ul>
+							<li><input type="checkbox" name="bid_opt_inout" id="I1" class="check"><label for="I1">풀 오토 에어컨</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I2" class="check"><label for="I4">좌우 독립 에어컨</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I3" class="check"><label for="I3">가죽시트</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I4" class="check"><label for="I4">전동시트 ( 운전석 )</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I5" class="check"><label for="I5">전동시트 ( 조수석 )</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I6" class="check"><label for="I6">전동시트 ( 뒷자석 )</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I7" class="check"><label for="I7">열선시트 ( 앞좌석 )</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I8" class="check"><label for="I8">열선시트 ( 뒷좌석)</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I9" class="check"><label for="I9">통풍시트</label></li>
+							<li><input type="checkbox" name="bid_opt_inout" id="I10" class="check"><label for="I10">후석모니터</label></li>
+						</ul>
+					</td>
+					<td colspan="2">
+						<ul>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C1" class="check"><label for="C1">썬루프</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C2" class="check"><label for="C2">파노라마 썬루프</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C3" class="check"><label for="C3">하이패스</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C4" class="check"><label for="C4">전동 접이식 미러</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C5" class="check"><label for="C5">ECM 룸 미러</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C6" class="check"><label for="C6">전동 트렁크</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C7" class="check"><label for="C7">스마트 키</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C8" class="check"><label for="C8">엔진 스타트 버튼</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C9" class="check"><label for="C9">어라운드뷰</label></li>
+							<li><input type="checkbox" name="bid_opt_convenience" id="C10" class="check"><label for="C10">하이빔어시스트</label></li>
+						</ul>
+					</td>
+					<td colspan="2">
+						<ul>
+							<li><input type="checkbox" name="bid_opt_safety" id="S1" class="check"><label for="S1">에어백 ( 운전석 )</label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S2" class="check"><label for="S2">에어백 ( 동승석 )</label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S3" class="check"><label for="S3">에어백 ( 사이드 )</label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S4" class="check"><label for="S4">커튼 에어백</label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S5" class="check"><label for="S5">ABS</label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S6" class="check"><label for="S6">TCS </label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S7" class="check"><label for="S7">후방 카메라 </label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S8" class="check"><label for="S8">후방 감지센서</label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S9" class="check"><label for="S9">후축방감지시스템</label></li>
+							<li><input type="checkbox" name="bid_opt_safety" id="S10" class="check"><label for="S10">차선이탈경보시스템</label></li>
+						</ul>
+					</td>
+					<td colspan="2">
+						<ul>
+							<li><input type="checkbox" name="bid_opt_device" id="D1" class="check"><label for="D1">네비게이션</label></li>
+							<li><input type="checkbox" name="bid_opt_device" id="D2" class="check"><label for="D2">블랙박스</label></li>
+							<li><input type="checkbox" name="bid_opt_device" id="D3" class="check"><label for="D3">CD 플레이어</label></li>
+							<li><input type="checkbox" name="bid_opt_device" id="D4" class="check"><label for="D4">블루투스</label></li>
+							<li><input type="checkbox" name="bid_opt_device" id="D5" class="check"><label for="D5">USB</label></li>
+						</ul>
+					</td>
+				</tr>	
+			</tbody>
+			</table>
+			
+						<!-- # 버튼 -->
+			<div class="btn-center">
+				<span class="btn-type1 right"><a href="#" id="history_back">이전</a></span>
+				<span class="btn-type1 c1"><a href="/apps/adm/bid_info_list.php">목록</a></span>
+				<span class="btn-type1 c2"><button type="submit">수정</button></span>
+			</div>
+			
+			</form>
+
+		<?php if ($output['bid_process']['list'] != NULL) {?>
+			<div class="tit-type1">
+				<h2>입찰자정보</h2>
+			</div>
+			<table class="tbl-list">
+				<tbody>
+					<thead>
+						<tr>
+							<th>순위</th>
+							<th>이름</th>
+							<th>등급</th>
+							<th>가격</th>
+							<th>신청일</th>
+						</tr>
+					</thead>
+				<?php foreach ( $output['bid_process']['list'] as $row ) {?>
+					<tr <?=$row['winner_class']?>>
+						<td class="text-c"><?=$row['ranking_str']?></td>
+						<td class="text-c"><?=$row['winner_img']?> <?=$row['deal_name']?>  [<a href="/apps/adm/dealer_info_view.php?deal_id=<?=$row['deal_id']?>">딜러정보</a>]</td>
+						<td class="text-c"><?=$row['deal_level_str']?></td>
+						<td class="text-c"><?=number_format($row['proc_price'])?>만원</td>
+						<td class="date"><?=$row['proc_regdate']?></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+		<?php } ?>
+		
+		<?php if ($output['bid_review']['list'] != NULL) {?>
+			<div class="tit-type1">
+				<h2>후기</h2>
+			</div>
+			<table class="tbl-form">
+				<tbody>
+				<?php foreach ( $output['bid_review']['list'] as $row ) {?>
+					<tr>
+						<th>
+							<?=$row['bid_name']?> [<?=$row['r_regdate']?>] <?=$row['r_mark_img']?>
+							<label for="r_del_yn<?=$row['r_idx']?>">삭제여부</label>
+							<select name="r_del_yn<?=$row['r_idx']?>" id="r_del_yn<?=$row['r_idx']?>" class="select" title="<?=$row['r_idx']?>">
+								<option value="N"<?=isSelected($row['r_del_yn'], "N")?>>아니오</option>
+								<option value="Y"<?=isSelected($row['r_del_yn'], "Y")?>>예</option>
+							</select> 							
+						</th>
+					</tr>
+					<tr>
+						<td><?=$row['r_content']?></td>
+					</tr>
+				<?php } ?>	
+				</tbody>
+			</table>
+		<?php } ?>
+				
+
+
+			
+		</div>
+	</div>
+</div>
+<!-- //container -->
+
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){
+		
+	<?php if($mode == "edit") {?>
+		$("#bid_state").val("<?=$bid_state?>");
+		
+		$("#bid_name").val("<?=$bid_name?>");		
+		$("#bid_phone2").val("<?=$bid_phone2?>");
+		$("#bid_phone3").val("<?=$bid_phone3?>");
+				
+		$("#bid_maker").val("<?=$bid_maker?>");
+		$("#bid_car_name").val("<?=$bid_car_name?>");
+		$("#bid_car_age").val("<?=$bid_car_age?>");
+		
+		$("#bid_car_num").val("<?=$bid_car_num?>");
+		$("#bid_mileage").val("<?=$bid_mileage?>");
+		$("#bid_capacity").val("<?=$bid_capacity?>");
+		$("#bid_sales_area").val("<?=$bid_sales_area?>");
+		$("#bid_transmission").val("<?=$bid_transmission?>");
+		$("#bid_fuel").val("<?=$bid_fuel?>");
+		$("#bid_request_time").val("<?=$bid_request_time?>");
+		$("#bid_del_yn").val("<?=$bid_del_yn?>");
+		
+		$('.photo_car .image img').each(function(){
+			if($(this).attr("src")) $(this).css("opacity","1");
+		});
+		
+		$("#bid_accident_check").val("<?=$bid_accident_check?>");
+		$("#bid_car_owner_check").val("<?=$bid_car_owner_check?>");
+		
+		// 내/ 외장 옵션 선택값
+		var bid_opt_inout = "<?=$bid_opt_inout?>";
+		var index = 0;
+		$("input[name=bid_opt_inout]").each(function() {
+			index = $("input[name=bid_opt_inout]").index($(this));				
+			if(bid_opt_inout.indexOf("I"+(index+1))>=0) $(this).prop('checked', true);
+		});
+		
+		// 편의장치 선택값
+		var bid_opt_convenience = "<?=$bid_opt_convenience?>";
+		var index = 0;
+		$("input[name=bid_opt_convenience]").each(function() {
+			index = $("input[name=bid_opt_convenience]").index($(this));				
+			if(bid_opt_convenience.indexOf("C"+(index+1))>=0) $(this).prop('checked', true);
+		});
+		
+		// 안전장치 선택값
+		var bid_opt_safety = "<?=$bid_opt_safety?>";
+		var index = 0;
+		$("input[name=bid_opt_safety]").each(function() {
+			index = $("input[name=bid_opt_safety]").index($(this));				
+			if(bid_opt_safety.indexOf("S"+(index+1))>=0) $(this).prop('checked', true);
+		});
+		
+		// 내/ 외장 옵션 선택값
+		var bid_opt_device = "<?=$bid_opt_device?>";
+		var index = 0;
+		$("input[name=bid_opt_device]").each(function() {
+			index = $("input[name=bid_opt_device]").index($(this));				
+			if(bid_opt_device.indexOf("D"+(index+1))>=0) $(this).prop('checked', true);
+		});
+		
+	<?php }?>
+		
+		var index = 0;
+		//차량이미지업로드
+		$(".photo_car .image input").on('change', function() {
+			index = $(".photo_car .image input").index($(this));
+			
+			ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+			//배열에 추출한 확장자가 존재하는지 체크
+			if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {				
+				alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+				return false;
+			}
+			
+			file = $(this).prop("files")[0];
+			blobURL = window.URL.createObjectURL(file);
+			//console.log(index+"/"+file);
+			$('.photo_car .image img').eq(index).css("opacity","1");
+			$('.photo_car .image img').eq(index).attr('src', blobURL);
+		});
+		
+		//입찰요청
+		$("#bid_reg_form").on("submit", function(){
+			
+			 <?php if($mode=="add"){ ?>
+			 var terms_agree = $("input[name='terms_agree']:checked").val();
+			 if(terms_agree != "Y"){
+				alert("서비스 이용약관에 동의를 선택하세요.");
+				$("#terms_agree").focus();
+				return false;
+			 }
+			 <?php }?>
+			
+			if($("#bid_maker").val()=="예 ) 현대, 르노삼성, 기아"){
+				alert("제조사를 입력해주세요.");
+				$("#bid_maker").focus();
+				return false;
+			}
+			
+			if($("#bid_car_name").val()=="예 ) 현대, 르노삼성, 기아"){
+				alert("차량명를 입력해주세요.");
+				$("#bid_car_name").focus();
+				return false;
+			}
+
+			if($("#bid_car_age").val()=="예 ) 현대, 르노삼성, 기아"){
+				alert("연식/월를 입력해주세요.");
+				$("#bid_car_age").focus();
+				return false;
+			}
+
+			if($("#bid_car_num").val()=="예 ) 02서5678"){
+				alert("차량번호를 입력해주세요.");
+				$("#bid_car_num").focus();
+				return false;
+			}
+			if($("#bid_mileage").val()=="예 ) 20,000"){
+				alert("주행거리를 입력해주세요.");
+				$("#bid_mileage").focus();
+				return false;
+			}
+
+			if($("#bid_capacity").val()=="예 ) 2500"){
+				alert("배기량를 입력해주세요.");
+				$("#bid_capacity").focus();
+				return false;
+			}
+
+			if($("#bid_sales_area").val()=="예 ) 서울 서초구 서초동"){
+				alert("판매지역을 입력해주세요.");
+				$("#bid_sales_area").focus();
+				return false;
+			}
+
+			if($("#bid_name").val()==""){
+				alert("성명을 입력해주세요.");
+				$("#bid_name").focus();
+				return false;
+			}
+
+			if($("#bid_phone1").val()=="" || $("#bid_phone2").val()=="" || $("#bid_phone3").val()==""){
+				alert("핸드폰번호를 입력하세요.");
+				$("#bid_phone2").focus();
+				return false;
+			}
+			
+			//내/ 외장 옵션
+			var bid_opt_inout = ""; 
+			$("input[name=bid_opt_inout]:checked").each(function() {
+				index = $("input[name=bid_opt_inout]").index($(this));
+				bid_opt_inout += ((bid_opt_inout) ? "," : "")+ "I"+(index+1);
+			});
+			$("#bid_opt_inout_val").val(bid_opt_inout);
+
+			//편의장치
+			var bid_opt_convenience = ""; 
+			$("input[name=bid_opt_convenience]:checked").each(function() {
+				index = $("input[name=bid_opt_convenience]").index($(this));
+				bid_opt_convenience += ((bid_opt_convenience) ? "," : "")+ "C"+(index+1);
+			});
+			$("#bid_opt_convenience_val").val(bid_opt_convenience);
+
+			//안전장치
+			var bid_opt_safety = ""; 
+			$("input[name=bid_opt_safety]:checked").each(function() {
+				index = $("input[name=bid_opt_safety]").index($(this));
+				bid_opt_safety += ((bid_opt_safety) ? "," : "")+ "S"+(index+1);
+			});
+			$("#bid_opt_safety_val").val(bid_opt_safety);
+
+			//내/ 외장 옵션
+			var bid_opt_device = ""; 
+			$("input[name=bid_opt_device]:checked").each(function() {
+				index = $("input[name=bid_opt_device]").index($(this));
+				bid_opt_device += ((bid_opt_device) ? "," : "")+ "D"+(index+1);
+			});
+			$("#bid_opt_device_val").val(bid_opt_device);
+			
+		<?php if($mode == "add") {?>
+			var msg = "차량을 입찰요청하시겠습니까?";	
+		<?php }else{ ?>	
+			var msg = "차량을 입찰수정하시겠습니까?";
+		<?php } ?>
+			
+			if(confirm(msg)){
+			}else{
+				return false;
+			}
+
+		});
+		
+		$("#history_back").click( function(e){
+			e.preventDefault();
+			history.back(1);
+			return false;
+		});
+					
+	});
+//-->
+</script>
+<?php include _HTML_BASE . "/adm/common/footer.html"; ?>

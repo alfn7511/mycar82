@@ -1,0 +1,147 @@
+<?php include _HTML_BASE . "/adm/common/header.html"; ?>
+<!-- container -->
+<div id="container">
+	<div id="content">
+		<?php include _HTML_BASE . "/adm/common/menu.html"; ?>
+		<div id="section">
+			<!--  # 페이지타이틀  -->
+			<h1>신고리스트</h1>
+			<!--  # 현재페이지경로  -->
+			<dl class="path">
+				<dt>현재페이지경로</dt>
+				<dd><a href="#none">HOME</a><span>&gt;</span><a href="#none">신고관리</a><span>&gt;</span><strong>신고리스트</strong></dd>
+			</dl>
+			
+			<form name="srhForm" id="srhForm" method="post">
+			<!-- # 테이블 : 폼형태(검색샘플) -->
+			<table class="tbl-form search">
+				<tbody>
+					<tr>
+						<th>기간검색</th>
+						<td colspan="3">
+							<input type="radio" name="searchTerm" id="searchTerm1" class="radio" onClick="inputDate('sdate', 'edate', 'D', 7);"><label for="searchTerm1">최근 일주일</label>
+							<input type="radio" name="searchTerm" id="searchTerm2" class="radio" onClick="inputDate('sdate', 'edate', 'M', 1);"><label for="searchTerm2">최근 한달</label>
+							<input type="radio" name="searchTerm" id="searchTerm3" class="radio" onClick="inputDate('sdate', 'edate', 'M', 3);"><label for="searchTerm3">최근 3개월</label>
+							<input type="text" class="text date" id="sdate" name="sdate" title="기간선택 시작일" value="<?=$sdate?>"> ~ <input type="text" class="text date" id="edate" name="edate" title="기간선택 종료일" value="<?=$edate?>">
+						</td>
+					</tr>
+					<tr>
+						<th>노출여부</th>
+						<td>
+							<input type="radio" name="co_del_yn" id="co_del_yn_n" class="radio" value="N"><label for="co_del_yn_n">노출</label>
+							<input type="radio" name="co_del_yn" id="co_del_yn_y" class="radio" value="Y"><label for="co_del_yn_y">비노출</label>
+						</td>
+					</tr>
+					<tr>
+						<th>조건검색</th>
+						<td colspan="3">
+							<select name="skey" id="skey" title="조건항목" class="select">
+								<option value="">선택</option>
+								<option value="co_title">제목</option>
+								<option value="co_content">내용</option>
+							</select>
+							<input type="text" name="sword" class="text sword" id="searchStr" value="<?=$sword?>">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4">
+							<div class="btn-center">
+								<!-- <span class="btn-type1"><a href="#none">전체보기</a></span> -->
+								<span class="btn-type1 c1"><button type="submit">검색</button></span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="tit-type1">
+				<h2>검색</h2>
+				<div class="con">
+					<select name="pagesize" id="pagesize" title="출력갯수설정" class="select">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+					</select>
+				</div>
+				<p class="sub txt-count">전체 : <strong><?=$output['complain_info']['tcnt']?></strong>건</p>
+			</div>
+			</form>
+			
+			<!-- # 테이블 : 리스트 -->
+			<table class="tbl-list">
+			<thead>
+				<tr>
+					<th><input type="checkbox" name="AllcbList" /></th>
+					<th>번호</th>
+					<th>제목</th>
+					<th>내용</th>
+					<th>삭제여부</th>
+					<th>등록일</th>
+				</tr>
+			</thead>
+			<tbody>
+<?php
+if ($output['complain_info']['list'] != NULL) {
+	foreach ( $output['complain_info']['list'] as $row ) {
+?>	
+				<tr>
+					<td class="num"><input type="checkbox" name="cbList" value="<?=$row['co_idx']?>" /></td>
+					<td class="num"><?=$row['idx']?></td>
+					<td class="tit text-c"><?=$row['co_title']?></td>
+					<td class="tit text-c"><?=$row['co_content']?></td>
+					<td class="num"><?=$row['co_del_yn']?></td>
+					<td class="date"><?=$row['co_regdate']?></td>
+				</tr>			
+<?php
+	}
+}
+?>
+			</tbody>
+			</table>
+			<!-- # 페이징 -->
+			<div class="paging">
+				<?=$output['complain_info']['page']?>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<!-- //container -->
+
+<script type="text/javascript">
+<!--
+	$(document).ready(function(){		
+
+		$("#pagesize").val("<?=$pagesize?>");
+		$('input:radio[name=co_del_yn]:input[value=<?=$co_del_yn?>]').attr("checked", true);
+		$("#skey").val("<?=$skey?>");
+		
+		$("#srhForm").submit(function(){
+		});
+		
+		$("#pagesize").change(function() {
+  			$("#srhForm").submit();
+		});
+
+		$("#sdate").datepicker({
+			changeMonth:true,
+			changeYear:true,
+			dateFormat: 'yy-mm-dd',
+			dayNames:['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],
+			monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
+			yearRange: '2007:2020'
+		});
+
+		$("#edate").datepicker({
+			changeMonth:true,
+			changeYear:true,
+			dateFormat: 'yy-mm-dd',
+			dayNames:['월요일','화요일','수요일','목요일','금요일','토요일','일요일'],
+			monthNamesShort:['1','2','3','4','5','6','7','8','9','10','11','12'],
+			yearRange: '2007:2020'
+		});
+
+	});
+//-->
+</script>
+<?php include _HTML_BASE . "/adm/common/footer.html"; ?>

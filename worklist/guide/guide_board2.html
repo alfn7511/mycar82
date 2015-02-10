@@ -1,0 +1,219 @@
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="euc-kr">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">
+
+<title>게시판2 | 퍼블리싱가이드 | 알플러스코리아</title>
+<link rel="stylesheet" type="text/css" href="../css/default.css">
+<link rel="stylesheet" type="text/css" href="../css/layout.css">
+<link rel="stylesheet" type="text/css" href="../css/guide.css">
+<link rel="stylesheet" type="text/css" href="/share/css/content.css">
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body>
+<div id="wrapper">
+	<!-- ### container ### -->
+	<div id="container">
+		<div class="wrap-content guide">
+			<h1 class="guide">게시판</h1>
+
+			<!-- 다른글더보기 -->
+			<h2 class="guide">다른글더보기 :  .board-other</h2>
+			<h3 class="guide">기본 : .board-other : .board-other > li > a</h3>
+			<ul class="board-other">
+				<li>
+					<a href="#none">
+						<span class="con"><em>PREVIOUS</em><strong>도시 숲으로의 탈출, Urbanex Leports</strong></span>
+					</a>
+				</li>
+				<li>
+					<a href="#none">
+						<span class="con"><em>NEXT</em><strong>다큐멘터리를 찍는 보통 사람들, Self-documentarian</strong></span>
+					</a>
+				</li>
+			</ul>
+
+			<h3 class="guide">이전글/다음글 없을때 : .board-other > li > div</h3>
+			<ul class="board-other">
+				<li>
+					<div>
+						<span class="con"><em>PREVIOUS</em><strong>이전글이 없습니다.</strong></span>
+					</div>
+				</li>
+				<li>
+					<div>
+						<span class="con"><em>NEXT</em><strong>다음글이 없습니다.</strong></span>
+					</div>
+				</li>
+			</ul>
+
+			<h3 class="guide">기본 + 이미지 : board-other.other-thum</h3>
+			<ul class="board-other other-thum">
+				<li>
+					<a href="#none">
+						<span class="con"><em>PREVIOUS</em><strong>도시 숲으로의 탈출, Urbanex Leports</strong></span>
+						<span class="thum"><img src="http://tv.알플러스코리아.co.kr/upload/aa7f7adb9cc0dae59ea5483100a9e410.jpg" alt=""></span>
+					</a>
+				</li>
+				<li>
+					<a href="#none">
+						<span class="con"><em>NEXT</em><strong>다큐멘터리를 찍는 보통 사람들, Self-documentarian</strong></span>
+						<span class="thum"><img src="http://tv.알플러스코리아.co.kr/upload/aa7f7adb9cc0dae59ea5483100a9e410.jpg" alt=""></span>
+					</a>
+				</li>
+			</ul>
+			<h3 class="guide">기본 + 이미지(이미지없을때) : board-other.other-thum</h3>
+			<ul class="board-other other-thum">
+				<li>
+					<a href="#none">
+						<span class="con"><em>PREVIOUS</em><strong>도시 숲으로의 탈출, Urbanex Leports</strong></span>
+						<span class="thum"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#none">
+						<span class="con"><em>NEXT</em><strong>다큐멘터리를 찍는 보통 사람들, Self-documentarian</strong></span>
+						<span class="thum"></span>
+					</a>
+				</li>
+			</ul>
+
+			<h3 class="guide">게시판일경우 : .board-view > .board-other.other-thum</h3>
+			<div class="board-view">
+				<ul class="board-other">
+					<li>
+						<a href="#none">
+							<span class="con"><em>PREVIOUS</em><strong>도시 숲으로의 탈출, Urbanex Leports</strong></span>
+						</a>
+					</li>
+					<li>
+						<a href="#none">
+							<span class="con"><em>NEXT</em><strong>다큐멘터리를 찍는 보통 사람들, Self-documentarian</strong></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 댓글 -->
+			<h2 class="guide">댓글 : .board-cmd</h2>
+			<section class="board-cmd">
+				<div class="tit-type1 tit-line">
+					<h2>댓글</h2>
+					<a href="#none" class="sub btn-help">작성 도움말</a>
+				</div>
+				<h3 class="hd">댓글달기</h3>
+				<!-- 로그인 안했을경우 : 문구출력-->
+				<div class="form-cmd">
+					<p class="mes"><strong>로그인 후 이용해 주세요. 주제와 무관한 의견, 악플은 삭제될 수 있습니다.</strong></p>
+				</div>
+				<!-- 로그인 안했을경우 : 입력폼-->
+				<div class="form-cmd">
+					<fieldset>
+						<legend>댓글달기</legend>
+						<div class="select-radio" id="searchCate">
+							<div><strong>전체</strong></div>
+							<ul>
+								<li>
+									<label for="cmdType1"><span class="icon-cmd1">좋아요</span></label>
+									<input type="radio" class="radio" id="cmdType1">
+								</li>
+								<li class="state2">
+									<label for="cmdType2"><span class="icon-cmd2">그저그래요</span></label>
+									<input type="radio" class="radio" id="cmdType2">
+								</li>
+								<li class="state3">
+									<label for="cmdType3"><span class="icon-cmd3">싫어요</span></label>
+									<input type="radio" class="radio" id="cmdType3">
+								</li>
+							</ul>
+						</div>
+						<label for="cmdText" class="label">00자 이내로 작성해 주세요</label>
+						<textarea rows="3" cols="20" class="textarea placeholder" id="cmdText"></textarea>
+					</fieldset>
+				</div>
+				<!-- SNS선택 및 버튼 -->
+				<div class="btn">
+					<strong>SNS 공유하기</strong>
+					<span class="label-check">
+						<label for="cmdSNSChk1">FaceBook</label>
+						<input type="checkbox" class="check" id="cmdSNSChk1">
+					</span>
+					<span class="label-check">
+						<label for="cmdSNSChk2">Twitter</label>
+						<input type="checkbox" class="check" id="cmdSNSChk2">
+					</span>
+					<span class="btn-type3"><button type="submit">댓글달기</button></span>
+				</div>
+				<!-- 댓글목록 -->
+				<h3 class="hd">댓글목록</h3>
+				<ul class="list-cmd">
+					<li>
+						<strong class="icon-cmd1" title="좋아요">좋아요</strong>
+						<p>알플러스코리아 브랜드에 대한 이미지가 더욱 높아지네요! 어느날 불쑥 하고 나타나 성공한것이 아니라 저런 비전과 노력이 있었기에 지금의 알플러스코리아가 있었다는것 이 영상보고 알게되었네요.</p>
+						<ul class="info">
+							<li>by <em>abcdefg@gmail.com</em></li>
+							<li>0000-00-00 AM 00:00</li>
+							<li><a href="#none" class="btn-del">삭제</a></li><!-- 본인이 쓴 댓글일 경우 -->
+						</ul>
+						<ul class="info-rec">
+							<li><a href="#none" title="댓글 추천"><span class="like on">추천</span><strong>0,000</strong></a>
+							<li><a href="#none" title="댓글 비추천"><span class="hate">비추천</span><strong>000</strong></a>
+							<li><a href="#none" title="댓글 신고">신고</a></li>
+						</ul>
+					</li>
+					<li>
+						<strong class="icon-cmd2" title="싫어요">싫어요</strong>
+						<p>알플러스코리아 브랜드에 대한 이미지가 더욱 높아지네요! 어느날 불쑥 하고 나타나 성공한것이 아니라 저런 비전과 노력이 있었기에 지금의 알플러스코리아가 있었다는것 이 영상보고 알게되었네요.</p>
+						<ul class="info">
+							<li>by <em>abcdefg@gmail.com</em></li>
+							<li>0000-00-00 AM 00:00</li>
+						</ul>
+						<ul class="info-rec">
+							<li><a href="#none" title="댓글 추천"><span class="like">추천</span><strong>0,000</strong></a>
+							<li><a href="#none" title="댓글 비추천"><span class="hate on">비추천</span><strong>000</strong></a>
+							<li><a href="#none" title="댓글 신고">신고</a></li>
+						</ul>
+					</li>
+					<li>
+						<strong class="icon-cmd3" title="그저그래요">그저그래요</strong>
+						<p>알플러스코리아 브랜드에 대한 이미지가 더욱 높아지네요! 어느날 불쑥 하고 나타나 성공한것이 아니라 저런 비전과 노력이 있었기에 지금의 알플러스코리아가 있었다는것 이 영상보고 알게되었네요.</p>
+						<ul class="info">
+							<li>by <em>abcdefg@gmail.com</em></li>
+							<li>0000-00-00 AM 00:00</li>
+
+						</ul>
+						<ul class="info-rec">
+							<li><a href="#none" title="댓글 추천"><span class="like">추천</span><strong>0,000</strong></a>
+							<li><a href="#none" title="댓글 비추천"><span class="hate">비추천</span><strong>000</strong></a>
+							<li><a href="#none" title="댓글 신고">신고</a></li>
+						</ul>
+					</li>
+				</ul>
+				<div class="btn-more">
+					<a href="#none"><strong>23.385</strong>개 모두보기<span></span></a>
+				</div>
+			</section>
+
+		</div>
+	</div>
+</div>
+<script src="../../resources/js/jquery.1.8.3.min.js"></script>
+<script src="../../resources/js/jquery.ui.1.8.23.min.js"></script>
+<script src="../../../worklist/js/jquery.syntax/jquery.syntax.js"></script>
+<script src="../../../worklist/js/jquery.syntax/jquery.syntax.cache.js"></script>
+<script src="../../resources/js/iscroll.js"></script>
+<script src="../../resources/js/common.js"></script>
+<script>
+	/* 댓글 셀렉트 디자인 */
+	$(".select-radio").selectRadio();
+</script>
+<script>
+//<!--
+	$.syntax({ theme: 'grey', layout: 'fixed', replace: true});
+//-->
+</script>
+</body>
